@@ -4,6 +4,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 -- | Run me with ./deploy.hs !!!
+-- or `stack deploy <your name>`
 
 import Prelude hiding (concat)
 import Turtle hiding (append)
