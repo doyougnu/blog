@@ -1,0 +1,3 @@
+build via: `nix-shell`, then `raco frog -bp`
+Deploy via: scp -r resources/public/\~youngjef/* youngjef@shell.onid.oregonstate.edu:~/public_html/  or the deploy script
+new post: `raco frog -n <name>`
