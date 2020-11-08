@@ -1,0 +1,11 @@
+#+TITLE: Jeff test  misc
+#+DATE: <2020-03-31 Tue>
+#+SUBTITLE: Notes from the miscellaneous
+#+OPTIONS: H:1 toc:nil num:nil
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="./css/main.css"/>
+
+* a header for the misc
+   Here is some text
+
+** another header
+   some more text

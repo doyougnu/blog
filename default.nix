@@ -5,6 +5,5 @@ stdenv.mkDerivation rec {
   buildInputs = [
     python37Packages.pygments
     racket
-    openssh
   ];
 }

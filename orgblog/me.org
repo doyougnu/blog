@@ -1,0 +1,16 @@
+#+TITLE: Jeff
+#+DATE: <2020-11-08 Sun>
+#+SUBTITLE: Notes from the miscellaneous
+#+OPTIONS: H:1 toc:nil num:nil
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="./css/main.css"/>
+
+* Research Interests
+   Here is some text
+
+** one
+   some more text
+
+** two
+   three
+
+* Other interests

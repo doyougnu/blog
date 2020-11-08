@@ -1,0 +1,6 @@
+* To Deploy
+** Build the site
+   #+begin_src
+   emacs -q --script publish.el -f doyougnu/publish
+   #+end_src
+** Deploy to remote

@@ -1,0 +1,22 @@
+#+TITLE: The bottom blog
+#+DATE: <2020-03-29 Sun>
+# #+SUBTITLE: Notes from the tooonnn
+#+OPTIONS: H:2 toc:nil num:nil
+
+A place for my random musings on programming languages, dungeons and dragons,
+and other nonsense.
+
+Trying H:2 org option
+
+
+* Programming Languages
+
+** [[file:testPL.org][test pl post]]                                                        :test:
+***  [[file:testMisc.org][A test misc post]]                                                 :nixos:
+**** three                                                            :again:
+
+* Academia
+
+* Tools I like
+
+* Miscellaneous

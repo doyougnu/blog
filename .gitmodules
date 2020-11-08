@@ -1,0 +1,3 @@
+[submodule "payload"]
+	path = public_html
+	url = git@github.com:doyougnu/doyougnu.github.io.git

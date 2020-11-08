@@ -1,0 +1,17 @@
+#+TITLE: Jeff test pl post!
+#+DATE:  <2020-03-31 Tue>
+#+SUBTITLE: Notes programming langs
+#+STYLE: <link rel='stylesheet' type='text/css' href='code.css'/>
+
+* lets look at some haskell code
+
+#+BEGIN_SRC haskell
+  data Foo = What | Hoo
+
+  foo :: (a -> b) -> a -> f b
+  foo = undefined
+#+END_SRC
+
+* an another
+
+* an another f
