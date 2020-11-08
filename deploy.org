@@ -1,6 +1,12 @@
 * To Deploy
 ** Build the site
+   This will rebuild the =public_html= directory
    #+begin_src
    emacs -q --script publish.el -f doyougnu/publish
    #+end_src
+
 ** Deploy to remote
+   #+begin_src
+   cd public_html
+   git push origin master
+   #+end_src
