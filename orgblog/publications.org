@@ -1,11 +1,13 @@
 * Peer-Reviewed Conference and Workshop Papers
 ** 2020
 ***  [[file:pubs/vsat.pdf][Variational Satisfiability Solving]]
-   Jeffrey M. Young, Eric Walkingshaw, Thomas Thüm
-   /ACM Int. Systems and Software Product Line Conf. (SPLC), 2020/
+   - Authors: Jeffrey M. Young, Eric Walkingshaw, Thomas Thüm
+   - Conference: /ACM Int. Systems and Software Product Line Conf. (SPLC), 2020/
+   - Data: [[https://github.com/lambda-land/VSat-Papers/tree/master/SPLC2020][on github]]
 
 ** 2018
 
 *** [[file:pubs/sigcse18-algorithm-explanations.pdf][A Domain Analysis of Data Structure and Algorithm Explanations in the Wild]]
-   Jeffrey M. Young and Eric Walkingshaw
-   /ACM SIGCSE Technical Symp. on Computer Science Education (SIGCSE), 2018, 870–875/
+   - Authors: Jeffrey M. Young and Eric Walkingshaw
+   - Conference: /ACM SIGCSE Technical Symp. on Computer Science Education (SIGCSE), 2018, 870–875/
+   - Data: [[https://github.com/lambda-land/XOP-Algorithms-Data][on github]]
