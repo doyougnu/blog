@@ -18,6 +18,7 @@
 (setf org-html-preamble t)
 (setf org-html-postamble nil)
 (setf org-html-indent nil)
+(setf org-export-preserve-breaks t)
 (setf org-src-preserve-indentation nil)
 
 (setf org-html-metadata-timestamp-format "%d %B %Y")
@@ -37,7 +38,8 @@
     </header>
     <ul class=\"links\">
         <li><a href='/index.html'>Blog</a></li>
-        <li><a href='/me.html'>About Me</a></li>
+        <li><a href='/me.html'>About me</a></li>
+        <li><a href='/publications.html'>Publications</a></li>
         <li><a href='https://github.com/doyougnu'>Github</a></li>
         <li><a href='http://groups.engr.oregonstate.edu/fpc/'>FPC</a></li>
     </ul>
