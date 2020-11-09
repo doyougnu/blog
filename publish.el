@@ -9,13 +9,15 @@
 (setf org-html-head-extra
       (concat "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
               "<link rel='stylesheet' href='./css/main.css' />"
-              "<link rel='stylesheet' type='text/css' href='code.css'/>"))
+              "<link rel='stylesheet' type='text/css' href='./css/org.css' />"
+              "<link rel='stylesheet' type='text/css' href='./css/code.css' />"
+              ))
 
 (setf org-html-home/up-format "")
 (setf org-html-link-up "")
 (setf org-html-link-home "")
 (setf org-html-scripts "")
-(setf org-html-preamble t)
+(setf org-html-preamble nil)
 (setf org-html-postamble nil)
 (setf org-html-indent nil)
 (setf org-export-preserve-breaks t)
@@ -32,19 +34,20 @@
 (setf org-html-metadata-timestamp-format "%d %B %Y")
 (setf org-html-doctype "html5")
 (setf org-export-date-timestamp-format "%d %B %Y")
-(setf org-html-preamble (concat "<div class=\"sidenav\" class=\"status\">
-    <header>
-        <h1><a href='https://doyougnu.github.io/index.html' rel='author'>⊥</a></h1>
-    </header>
+
+(defconst preamble
+  (concat "<div class=\"sidenav\" class=\"status\">
     <ul class=\"links\">
         <li><a href='/index.html'>Blog</a></li>
-        <li><a href='/me.html'>About</a></li>
         <li><a href='/publications.html'>Publications</a></li>
         <li><a href='https://github.com/doyougnu'>Github</a></li>
+        <li><a href='/me.html'>About</a></li>
         <li><a href='http://groups.engr.oregonstate.edu/fpc/'>FPC</a></li>
     </ul>
     <p class='license'>Share under <a href='http://creativecommons.org/licenses/by-sa/4.0/' rel='license'>CC-BY-SA</a></p>
 </div> "))
+
+(setf org-html-preamble preamble)
 
 ;; self host mathjax
 ;; (setf org-html-mathjax-options
@@ -69,6 +72,7 @@
          :publishing-directory "~/Programming/blog/public_html/"
          :recursive t
          :publishing-function org-html-publish-to-html
+         ;; :html-preamble preamble
          :headline-levels 1
          :section-numbers nil
          :with-toc nil

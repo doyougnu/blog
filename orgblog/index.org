@@ -1,22 +1,41 @@
-#+TITLE: The bottom blog
+#+TITLE: Speaking with machines
+#+SUBTITLE: A blog about programming languages
 #+DATE: <2020-03-29 Sun>
-# #+SUBTITLE: Notes from the tooonnn
 #+OPTIONS: H:2 toc:nil num:nil
 
-A place for my random musings on programming languages, dungeons and dragons,
-and other nonsense.
 
-Trying H:2 org option
+* Pl related posts
 
+** [[file:testPL.org][test pl post]]                                                    :dnd:test:
 
-* Programming Languages
+** two                                                             :research:
 
-** [[file:testPL.org][test pl post]]                                                        :test:
-***  [[file:testMisc.org][A test misc post]]                                                 :nixos:
-**** three                                                            :again:
+   #+begin_src haskell
+-- | Generalization of 'Data.SBV.Control.getIndependentOptResults'
+getIndependentOptResults :: forall m. (MonadIO m, MonadQuery m) => [String] -> m [(String, SMTResult)]
+getIndependentOptResults objNames = do cfg <- getConfig
+                                       cs  <- checkSat
 
-* Academia
+                                       case cs of
+                                         Unsat  -> getUnsatCoreIfRequested >>= \mbUC -> return [(nm, Unsatisfiable cfg mbUC) | nm <- objNames]
+                                         Sat    -> continue (classifyModel cfg)
+                                         DSat{} -> continue (classifyModel cfg)
+                                         Unk    -> do ur <- Unknown cfg <$> getUnknownReason
+                                                      return [(nm, ur) | nm <- objNames]
 
-* Tools I like
+  where continue classify = do objectiveValues <- getObjectiveValues
+                               nms <- zipWithM getIndependentResult [0..] objNames
+                               return [(n, classify (m {modelObjectives = objectiveValues})) | (n, m) <- nms]
 
-* Miscellaneous
+        getIndependentResult :: Int -> String -> m (String, SMTModel)
+        getIndependentResult i s = do m <- getModelAtIndex (Just i)
+                                      return (s, m)
+
+   #+end_src
+#+begin_src haskell
+data Foo = Bar | Baz deriving (Eq)
+#+end_src
+
+* Tools
+
+* Other (read rants)

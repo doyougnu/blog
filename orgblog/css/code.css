@@ -25,15 +25,13 @@ body {
   font-family: Helvetica, arial, sans-serif;
   font-size: 14px;
   line-height: 1.6;
-  padding-top: 10px;
-  padding-bottom: 10px;
   background-color: white;
-  padding: 30px;
+  padding-left: 25px;
   color: #333;
 }
 
 body > *:first-child {
-  margin-top: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 body > *:last-child {
@@ -60,14 +58,6 @@ a.anchor {
   bottom: 0;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  margin: 20px 0 10px;
-  padding: 0;
-  font-weight: bold;
-  -webkit-font-smoothing: antialiased;
-  cursor: text;
-  position: relative;
-}
 
 h2:first-child, h1:first-child, h1:first-child + h2, h3:first-child, h4:first-child, h5:first-child, h6:first-child {
   margin-top: 0;
@@ -174,9 +164,9 @@ li p.first {
   display: inline-block;
 }
 
-ul, ol {
-  padding-left: 30px;
-}
+/* ul, ol { */
+/*   padding-left: 30px; */
+/* } */
 
 ul :first-child, ol :first-child {
   margin-top: 0;
@@ -408,3 +398,20 @@ pre code, pre tt {
   background-color: transparent;
   border: none;
 }
+
+h2 {
+    font-size: 17px;
+}
+
+h3 {
+    font-size: 15px;
+}
+
+/* h1, h2, h3, h4, h5, h6 { */
+/*   margin: 20px 0 10px; */
+/*   padding: 0; */
+/*   font-weight: bold; */
+/*   -webkit-font-smoothing: antialiased; */
+/*   cursor: text; */
+/*   position: relative; */
+/* } */
