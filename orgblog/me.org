@@ -1,16 +1,20 @@
 #+TITLE: Jeff
 #+DATE: <2020-11-08 Sun>
-#+SUBTITLE: Notes from the miscellaneous
+#+SUBTITLE:
 #+OPTIONS: H:1 toc:nil num:nil
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="./css/main.css"/>
 
-* Research Interests
-   Here is some text
 
-** one
-   some more text
+* How do you buy food and shelter?
+  I'm a PhD candidate at Oregon State University.
 
-** two
-   three
+* What have you been up to?
+  Finishing that damned PhD, hacking [[https://github.com/LeventErkok/sbv][sbv]] or [[https://github.com/doyougnu][vsat/vsmt]] or likely programming
+  something.
 
-* Other interests
+* How to contact you?
+  jeff@doyougnu.xyz
+
+* Why "doyougnu" for everything online?
+  My legal name =Jeffrey M. Young= is extremely common, so I resort to a
+  pseudonym.
