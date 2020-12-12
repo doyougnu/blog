@@ -67,9 +67,9 @@
 
 (setq org-publish-project-alist
       `(("org-pages"
-         :base-directory "~/Programming/blog/orgblog"
+         :base-directory "./orgblog"
          :base-extension "org"
-         :publishing-directory "~/Programming/blog/public_html/"
+         :publishing-directory "./public_html/"
          :recursive t
          :publishing-function org-html-publish-to-html
          ;; :html-preamble preamble
@@ -80,9 +80,9 @@
          :with-creator nil)
 
         ("org-static"
-         :base-directory "~/Programming/blog/orgblog"
+         :base-directory "./orgblog"
          :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
-         :publishing-directory "~/Programming/blog/public_html/"
+         :publishing-directory "./public_html/"
          :recursive t
          :html-head-include-default-style nil
          :publishing-function org-publish-attachment)
