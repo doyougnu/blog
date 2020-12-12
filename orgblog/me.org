@@ -10,7 +10,7 @@
 
 * What have you been up to?
   Finishing that damned PhD, hacking [[https://github.com/LeventErkok/sbv][sbv]] or [[https://github.com/doyougnu][vsat/vsmt]] or likely programming
-  something....
+  something................
 
 * How to contact you?
   jeff@doyougnu.xyz
