@@ -1,6 +1,12 @@
 * To Deploy
+** Source code highlighting
+   You have to run ~doyougnu/publish~ in an ~ielm~ repl or else the fonts won't
+load
+
 ** Build the site
-   This will rebuild the =public_html= directory
+   This will rebuild the =public_html= directory. This will not apply syntax
+   highlighting to the source code blocks though
+
    #+begin_src
    emacs -q --script publish.el -f doyougnu/publish
    #+end_src

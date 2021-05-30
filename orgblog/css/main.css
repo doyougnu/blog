@@ -39,9 +39,36 @@ article img {
   height: auto;
 }
 
-/* Right-aligned section inside the top navigation */
-.topnav-right {
-    float: right;
+/* Style the links inside the navigation bar */
+.topnav a {
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    position: relative;
+
+    /* Centered section inside the top navigation */
+    float: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+/* Responsive navigation menu - display links on top of each other instead of next to each other (for mobile devices) */
+@media screen and (max-width: 600px) {
+    .topnav a, .topnav-right {
+        float: none;
+        display: block;
+    }
+
+    .topnav-centered a {
+        position: relative;
+        top: 0;
+        left: 0;
+        transform: none;
+    }
 }
 
 .footer-content {
@@ -140,9 +167,11 @@ $max-width: 710px;
 }
 
 .title {
+    position: absolute;
+    top: 0px;
     text-align: left;
     margin: 0.8em auto;
-    margin-top: 0px;
+    margin-top: 10px;
     margin-bottom: 70px;
     padding-top: 0px;
     color: black;
@@ -156,6 +185,7 @@ $max-width: 710px;
     color: gray;
     /* font-weight: bold; */
     margin: 1em auto;
+    padding-bottom: 70px
 }
 
 .abstract {
@@ -651,6 +681,10 @@ p.verse {
 }
 .org-src-container>pre.src-rust:before {
     content: 'Rust';
+}
+
+.outline-2 {
+    margin-top: 100px;
 }
 
 .inlinetask {

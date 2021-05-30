@@ -33,9 +33,16 @@ getIndependentOptResults objNames = do cfg <- getConfig
 
    #+end_src
 #+begin_src haskell
-data Foo = Bar | Baz deriving (Eq)
+  data Foo = Bar | Baz deriving (Eq)
+
+  x = foldr (+) 0 [1..100]
 #+end_src
 
+#+begin_src python
+  def foo():
+      for i in range(foor);
+#+end_src
 * Tools
+  something something
 
 * Other (read rants)
