@@ -54,7 +54,7 @@
       `(("org-pages"
          :base-directory "./orgblog"
          :base-extension "org"
-         :publishing-directory "./doyougnu.github.io/"
+         :publishing-directory "./build"
          :recursive t
          :publishing-function org-html-publish-to-html
          ;; :html-preamble preamble
