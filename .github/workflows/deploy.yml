@@ -13,7 +13,7 @@ jobs:
 
       - name: Install and Build 🔧
         run: |
-          sudo apt-get -y emacs
+          sudo apt-get install emacs
           emacs -q --script publish.el -f doyougnu/publish
 
       - name: Deploy 🚀
