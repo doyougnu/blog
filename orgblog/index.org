@@ -6,42 +6,10 @@
 
 * Pl related posts
 
-** [[file:testPL.org][test pl post]]                                                    :dnd:test:
+** [[file:posts/time-to-write.org][time to write]] :life:
 
 ** two                                                             :research:
 
-   #+begin_src haskell
--- | Generalization of 'Data.SBV.Control.getIndependentOptResults'
-getIndependentOptResults :: forall m. (MonadIO m, MonadQuery m) => [String] -> m [(String, SMTResult)]
-getIndependentOptResults objNames = do cfg <- getConfig
-                                       cs  <- checkSat
-
-                                       case cs of
-                                         Unsat  -> getUnsatCoreIfRequested >>= \mbUC -> return [(nm, Unsatisfiable cfg mbUC) | nm <- objNames]
-                                         Sat    -> continue (classifyModel cfg)
-                                         DSat{} -> continue (classifyModel cfg)
-                                         Unk    -> do ur <- Unknown cfg <$> getUnknownReason
-                                                      return [(nm, ur) | nm <- objNames]
-
-  where continue classify = do objectiveValues <- getObjectiveValues
-                               nms <- zipWithM getIndependentResult [0..] objNames
-                               return [(n, classify (m {modelObjectives = objectiveValues})) | (n, m) <- nms]
-
-        getIndependentResult :: Int -> String -> m (String, SMTModel)
-        getIndependentResult i s = do m <- getModelAtIndex (Just i)
-                                      return (s, m)
-
-   #+end_src
-#+begin_src haskell
-  data Foo = Bar | Baz deriving (Eq)
-
-  x = foldr (+) 0 [1..100]
-#+end_src
-
-#+begin_src python
-  def foo():
-      for i in range(foor);
-#+end_src
 * Tools
   something something
 

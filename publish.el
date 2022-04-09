@@ -7,8 +7,9 @@
 (setf org-export-html-coding-system 'utf-8-unix)
 (setf org-html-htmlize-output-type 'css)
 (setf org-html-head-extra
-      (concat "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
+      (concat "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
               "<link rel='stylesheet' href='./css/main.css' />"
+              ;; "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/water.css@2/out/water.css'>"
               "<link rel='stylesheet' type='text/css' href='./css/org-default.css' />"
               "<link rel='stylesheet' type='text/css' href='./css/code.css' />"
               ))
@@ -36,17 +37,6 @@
 (setf org-html-doctype "html5")
 (setf org-export-date-timestamp-format "%d %B %Y")
 
-;; (defconst preamble
-;;   (concat "<div class=\"topnav\" class=\"status\">
-;;     <ul class=\"links\">
-;;         <li><a href='/index.html'>Blog</a></li>
-;;         <li><a href='/publications.html'>Publications</a></li>
-;;         <li><a href='https://github.com/doyougnu'>Github</a></li>
-;;         <li><a href='/me.html'>About</a></li>
-;;         <li><a href='http://groups.engr.oregonstate.edu/fpc/'>FPC</a></li>
-;;     </ul>
-;;     <p class='license'>Share under <a href='http://creativecommons.org/licenses/by-sa/4.0/' rel='license'>CC-BY-SA</a></p>
-;; </div> "))
 
 (defconst preamble
   (concat "<div class=\"topnav\" class=\"status\">
@@ -59,27 +49,12 @@
 
 (setf org-html-preamble preamble)
 
-;; self host mathjax
-;; (setf org-html-mathjax-options
-;;       '((path "/etc/MathJax/MathJax.js?config=TeX-AMS-MML_HTMLorMML")
-;;         (scale "100") (align "center") (indent "2em") (mathml nil)))
-;; (setf org-html-mathjax-template
-;;       "<script type=\"text/javascript\" src=\"%PATH\"></script>")
-
-;; override drawers to be blocks of texts
-;; (defun my-org-export-format-drawer (name content)
-;;   (concat "<div class=\"drawer " (downcase name) "\">\n"
-;;           "<h6>" (capitalize name) "</h6>\n"
-;;           content
-;;           "\n</div>"))
-;; (setq org-html-format-drawer-function 'my-org-export-format-drawer)
-
 
 (setq org-publish-project-alist
       `(("org-pages"
          :base-directory "./orgblog"
          :base-extension "org"
-         :publishing-directory "./public_html/"
+         :publishing-directory "./doyougnu.github.io/"
          :recursive t
          :publishing-function org-html-publish-to-html
          ;; :html-preamble preamble
@@ -92,7 +67,7 @@
         ("org-static"
          :base-directory "./orgblog"
          :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
-         :publishing-directory "./public_html/"
+         :publishing-directory "./doyougnu.github.io/"
          :recursive t
          :html-head-include-default-style nil
          :publishing-function org-publish-attachment)
