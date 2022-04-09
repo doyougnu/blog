@@ -30,7 +30,7 @@
 (setf org-html-head-include-default-style nil)
 
 (setq user-full-name "doyougnu")
-(setq user-mail-address "youngjef@oregonstate.edu")
+(setq user-mail-address "jeffrey.young@iohk.io")
 
 ;; set the side bar
 (setf org-html-metadata-timestamp-format "%d %B %Y")
@@ -66,8 +66,8 @@
 
         ("org-static"
          :base-directory "./orgblog"
-         :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
-         :publishing-directory "./doyougnu.github.io/"
+         :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|CNAME"
+         :publishing-directory "./build"
          :recursive t
          :html-head-include-default-style nil
          :publishing-function org-publish-attachment)
