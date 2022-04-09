@@ -15,7 +15,7 @@ jobs:
         run: |
           sudo apt-get install emacs
           emacs -q --script publish.el -f doyougnu/publish
-          cp CNAME /build
+          pwd
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.0
