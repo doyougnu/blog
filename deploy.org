@@ -12,7 +12,6 @@ load
    #+end_src
 
 ** Deploy to remote
-   #+begin_src
-   cd public_html
-   git push origin master
-   #+end_src
+deployment is done via github actions. This is very hacky but for our needs it
+works well. Read through ~.github/workflows/deploy.yml~ for a precise description.
+We simply use an ubuntu container, install emacs, and run the ~publish.el~ script

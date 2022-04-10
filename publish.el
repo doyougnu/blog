@@ -66,7 +66,7 @@
 
         ("org-static"
          :base-directory "./orgblog"
-         :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\|CNAME"
+         :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
          :publishing-directory "./build"
          :recursive t
          :html-head-include-default-style nil
