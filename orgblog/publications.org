@@ -1,4 +1,6 @@
+
 * Peer-Reviewed Conference and Workshop Papers
+
 ** 2020
 ***  [[file:pubs/vsat.pdf][Variational Satisfiability Solving]]
    - Authors: Jeffrey M. Young, Eric Walkingshaw, Thomas Thüm
@@ -6,8 +8,49 @@
    - Data: [[https://github.com/lambda-land/VSat-Papers/tree/master/SPLC2020][on github]]
 
 ** 2018
-
 *** [[file:pubs/sigcse18-algorithm-explanations.pdf][A Domain Analysis of Data Structure and Algorithm Explanations in the Wild]]
    - Authors: Jeffrey M. Young and Eric Walkingshaw
    - Conference: /ACM SIGCSE Technical Symp. on Computer Science Education (SIGCSE), 2018, 870–875/
    - Data: [[https://github.com/lambda-land/XOP-Algorithms-Data][on github]]
+
+* Journal Articles
+
+** 2022
+
+*** Variational Satisfiability Solving: Solving Lots of Related SAT Problems
+   - Authors: Jeffrey M. Young, Paul Maximilian Bittner, Eric Walkingshaw,
+     Thomas Thüm
+   - Journal: /Empirical Software Engineering ([[https://emsejournal.github.io/][EMSE]])/
+   - Publisher: Springer
+
+* Theses and Other Papers
+
+** 2022
+
+*** White Paper: [[https://hsyl20.fr/home/files/papers/2022-ghc-modularity.pdf][Modularizing GHC]]
+   - Authors: Sylvain Henry, John Ericson, Jeffery M. Young
+
+** 2021
+*** [[https://ir.library.oregonstate.edu/concern/graduate_thesis_or_dissertations/dv140182g][PhD Thesis: Variational Satisfiability Solving]]
+   - Authors: Jeffrey M. Young
+
+* Books
+
+** 2022
+
+*** [[https://github.com/input-output-hk/hs-opt-handbook.github.io][Haskell Optimization Handbook]]
+    - Still in progress, will be hosted on the Haskell Foundation website
+      eventually.
+
+* Talks
+
+** 2022
+
+*** [[https://github.com/input-output-hk/hs-opt-handbook.github.io][The Haskell Optimization Handbook]]
+    - Conference: /Haskell Implementors Workshop, (HiW), 2022/
+
+
+** 2021
+
+*** [[https://youtu.be/dFDTzYsXu6c][Adventures in GHC Compile Times]]
+    - Conference: /Haskell Implementors Workshop, (HiW), 2021/

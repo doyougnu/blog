@@ -6,11 +6,7 @@
 
 
 * How do you buy food and shelter?
-  I'm a PhD candidate at Oregon State University.
-
-* What have you been up to?
-  Finishing that damned PhD, hacking [[https://github.com/LeventErkok/sbv][sbv]] or [[https://github.com/doyougnu][vsat/vsmt]] or likely programming
-  something................
+  I work full time on GHC for [[https://iohk.io/][IOHK]].
 
 * How to contact you?
   jeff@doyougnu.xyz
