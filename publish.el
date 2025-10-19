@@ -13,7 +13,7 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    margin: 0;
+    margin: 5;
     padding: 0;
     line-height: 1.6;
   }
@@ -23,13 +23,13 @@
   #postamble {
     padding: 1em;
     text-align: center;
-    background-color: #f8f8f8;
     border-top: 1px solid #ccc;
   }
 </style>")
+
 (setf org-html-head-extra
-      (concat "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
-              "<link rel='stylesheet' href='./css/main.css' />"
+      (concat ;; "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
+              ;; "<link rel='stylesheet' href='./css/main.css' />"
               ;; "<link rel='stylesheet' type='text/css' href='./css/code.css' />"
               org-html-head-extra-postamble
               ))
