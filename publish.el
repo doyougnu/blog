@@ -8,10 +8,10 @@
 (setf org-html-htmlize-output-type 'css)
 (setf org-html-head-extra
       (concat "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
-              "<link rel='stylesheet' href='./css/main.css' />"
+              "<link rel='stylesheet' href='./css/fuckingstyle.css' />"
               ;; "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/water.css@2/out/water.css'>"
-              "<link rel='stylesheet' type='text/css' href='./css/org-default.css' />"
-              "<link rel='stylesheet' type='text/css' href='./css/code.css' />"
+              ;; "<link rel='stylesheet' type='text/css' href='./css/org-default.css' />"
+              ;; "<link rel='stylesheet' type='text/css' href='./css/code.css' />"
               ))
 
 (setf org-html-home/up-format "")
@@ -30,7 +30,7 @@
 (setf org-html-head-include-default-style nil)
 
 (setq user-full-name "doyougnu")
-(setq user-mail-address "jeffrey.young@iohk.io")
+(setq user-mail-address "jmy6342@gmail.com")
 
 ;; set the side bar
 (setf org-html-metadata-timestamp-format "%d %B %Y")
