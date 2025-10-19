@@ -1,4 +1,4 @@
-#+TITLE: About Me
+#+TITLE: About
 #+DATE: <2020-11-08 Sun>
 #+SUBTITLE:
 #+OPTIONS: H:1 toc:nil num:nil

@@ -16,7 +16,7 @@
 (setf org-html-link-up "")
 (setf org-html-link-home "")
 (setf org-html-scripts "")
-(setf org-html-preamble nil)
+(setf org-html-preamble  nil)
 (setf org-html-postamble nil)
 (setf org-html-indent nil)
 (setf org-export-preserve-breaks t)
@@ -36,15 +36,17 @@
 (setf org-export-date-timestamp-format "%d %B %Y")
 
 
-(defconst preamble
-  (concat "<div class=\"topnav\" class=\"status\">
-        <a href='/index.html'>Blog</a>
-        <a href='/publications.html'>Publications</a>
-        <a href='https://github.com/doyougnu'>Github</a>
-        <a href='/me.html'>About</a>
+(defconst postamble
+  (concat
+       "<hr>
+        <div class=\"botnav\" class=\"status\">
+          <a href='/index.html'>Blog</a>
+          <a href='/publications.html'>Publications</a>
+          <a href='https://github.com/doyougnu'>Github</a>
+          <a href='/me.html'>About</a>
         </div> "))
 
-(setf org-html-preamble preamble)
+(setf org-html-postamble postamble)
 
 
 (setq org-publish-project-alist
