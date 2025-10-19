@@ -6,11 +6,10 @@
 
 * Pl related posts
 
-** [[file:posts/time-to-write.org][time to write]] :life:
-
-** two                                                             :research:
+** [[file:posts/time-to-write.org][time to write]]
 
 * Tools
+
   something something
 
 * Other (read rants)
