@@ -6,11 +6,15 @@
 
 
 * How do you buy food and shelter?
-  I work full time on GHC for [[https://iohk.io/][IOHK]].
+
+  I work on the Verse Programming Language for Epic Games. All views on this
+  blog are my own.
 
 * How to contact you?
-  jeff@doyougnu.xyz
+
+  jeff@pure-systems.org
 
 * Why "doyougnu" for everything online?
+
   My legal name =Jeffrey M. Young= is extremely common, so I resort to a
   pseudonym.

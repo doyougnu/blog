@@ -8,7 +8,7 @@
 (setf org-html-htmlize-output-type 'css)
 (setf org-html-head-extra
       (concat "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
-              ;; "<link rel='stylesheet' href='./css/fuckingstyle.css' />"
+              "<link rel='stylesheet' href='./css/main.css' />"
               ;; "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/water.css@2/out/water.css'>"
               ;; "<link rel='stylesheet' type='text/css' href='./css/org-default.css' />"
               ;; "<link rel='stylesheet' type='text/css' href='./css/code.css' />"
@@ -44,8 +44,7 @@
         <a href='/publications.html'>Publications</a>
         <a href='https://github.com/doyougnu'>Github</a>
         <a href='/me.html'>About</a>
-        ;; <a href='http://groups.engr.oregonstate.edu/fpc/'>FPC</a>
-</div> "))
+        </div> "))
 
 (setf org-html-preamble preamble)
 
