@@ -23,12 +23,17 @@
   #postamble {
     padding: 1em;
     text-align: center;
+    border-top: 1px solid #ccc;
+    display: flex; /* 1. Turn postamble into a horizontal flex container */
+    justify-content: center; /* 2. Center the group of links horizontally */
+    gap: 2em; /* 3. Add space *between* the items (the preferred, modern way) */
   }
 </style>")
-;;    border-top: 1px solid #ccc;
 
 (setf org-html-head-extra
       (concat "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
+              ;; "<link rel='stylesheet' href='./css/main.css' />"
+              ;; "<link rel='stylesheet' type='text/css' href='./css/code.css' />"
               org-html-head-extra-postamble
               ))
 
