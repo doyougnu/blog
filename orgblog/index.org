@@ -1,8 +1,6 @@
 #+TITLE: Speaking with machines
-#+SUBTITLE: A blog about programming languages
 #+DATE: <2020-03-29 Sun>
 #+OPTIONS: H:2 toc:nil num:nil
-
 
 * Pl related posts
 

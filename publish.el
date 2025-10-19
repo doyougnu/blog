@@ -9,8 +9,6 @@
 (setf org-html-head-extra
       (concat "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
               "<link rel='stylesheet' href='./css/main.css' />"
-              ;; "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/water.css@2/out/water.css'>"
-              ;; "<link rel='stylesheet' type='text/css' href='./css/org-default.css' />"
               ;; "<link rel='stylesheet' type='text/css' href='./css/code.css' />"
               ))
 

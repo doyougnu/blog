@@ -1,9 +1,7 @@
-#+TITLE: Jeff
+#+TITLE: About Me
 #+DATE: <2020-11-08 Sun>
 #+SUBTITLE:
 #+OPTIONS: H:1 toc:nil num:nil
-#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="./css/main.css"/>
-
 
 * How do you buy food and shelter?
 
