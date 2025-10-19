@@ -25,12 +25,19 @@
 <span class="subtitle">It has been awhile!</span>
 </h1>
 
-<div id="outline-container-org6bc350f" class="outline-2">
-<h2 id="org6bc350f">The need to begin writing again!</h2>
-<div class="outline-text-2" id="text-org6bc350f">
-<p>
-more gs<br>
-</p>
+<div id="outline-container-org64bc345" class="outline-2">
+<h2 id="org64bc345">The need to begin writing again!</h2>
+<div class="outline-text-2" id="text-org64bc345">
+<div class="org-src-container">
+<pre class="src src-haskell">the :: ExprPrim
+the t dest stx = do
+  Stx _ _ (_, ty, expr) &lt;- mustHaveEntries stx
+  saveOrigin dest (stxLoc expr)
+  tyDest &lt;- scheduleType KStar ty
+  -- TODO add type to elaborated program? Or not?
+  forkAwaitingType tyDest [TypeThenUnify dest t, TypeThenExpandExpr dest expr]
+</pre>
+</div>
 </div>
 </div>
 </div>
