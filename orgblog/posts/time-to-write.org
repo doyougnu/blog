@@ -5,4 +5,13 @@
 
 * The need to begin writing again!
 
-more gs
+
+ #+begin_src haskell
+   the :: ExprPrim
+   the t dest stx = do
+     Stx _ _ (_, ty, expr) <- mustHaveEntries stx
+     saveOrigin dest (stxLoc expr)
+     tyDest <- scheduleType KStar ty
+     -- TODO add type to elaborated program? Or not?
+     forkAwaitingType tyDest [TypeThenUnify dest t, TypeThenExpandExpr dest expr]
+ #+end_src
