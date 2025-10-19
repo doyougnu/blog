@@ -7,7 +7,25 @@
 <title>Time To Write</title>
 <meta name="generator" content="Org Mode" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel='stylesheet' href='./css/main.css' />
+<link rel='stylesheet' href='./css/main.css' /><style type="text/css">
+  body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+  }
+  #content {
+    flex-grow: 1; /* Pushes the postamble down */
+  }
+  #postamble {
+    padding: 1em;
+    text-align: center;
+    background-color: #f8f8f8;
+    border-top: 1px solid #ccc;
+  }
+</style>
 </head>
 <body>
 <div id="content" class="content">
@@ -16,9 +34,9 @@
 <span class="subtitle">It has been awhile!</span>
 </h1>
 
-<div id="outline-container-orgf7810c8" class="outline-2">
-<h2 id="orgf7810c8">The need to begin writing again!</h2>
-<div class="outline-text-2" id="text-orgf7810c8">
+<div id="outline-container-org4231499" class="outline-2">
+<h2 id="org4231499">The need to begin writing again!</h2>
+<div class="outline-text-2" id="text-org4231499">
 <div class="org-src-container">
 <pre class="src src-haskell">the :: ExprPrim
 the t dest stx = do
@@ -34,7 +52,7 @@ the t dest stx = do
 </div>
 <div id="postamble" class="status">
 <hr>
-        <div class="botnav" class="status">
+       <div class="botnav" style="text-align:center; margin-top: 1em;">
           <a href='/index.html'>Blog</a>
           <a href='/publications.html'>Publications</a>
           <a href='https://github.com/doyougnu'>Github</a>
