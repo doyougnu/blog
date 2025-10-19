@@ -6,10 +6,32 @@
 
 (setf org-export-html-coding-system 'utf-8-unix)
 (setf org-html-htmlize-output-type 'css)
+
+(setq org-html-head-extra-postamble
+      "<style type=\"text/css\">
+  body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+  }
+  #content {
+    flex-grow: 1; /* Pushes the postamble down */
+  }
+  #postamble {
+    padding: 1em;
+    text-align: center;
+    background-color: #f8f8f8;
+    border-top: 1px solid #ccc;
+  }
+</style>")
 (setf org-html-head-extra
       (concat "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
               "<link rel='stylesheet' href='./css/main.css' />"
               ;; "<link rel='stylesheet' type='text/css' href='./css/code.css' />"
+              org-html-head-extra-postamble
               ))
 
 (setf org-html-home/up-format "")
@@ -38,8 +60,8 @@
 
 (defconst postamble
   (concat
-       "<hr>
-        <div class=\"botnav\" class=\"status\">
+   "<hr>
+       <div class=\"botnav\" style=\"text-align:center; margin-top: 1em;\">
           <a href='/index.html'>Blog</a>
           <a href='/publications.html'>Publications</a>
           <a href='https://github.com/doyougnu'>Github</a>
@@ -47,7 +69,6 @@
         </div> "))
 
 (setf org-html-postamble postamble)
-
 
 (setq org-publish-project-alist
       `(("org-pages"
