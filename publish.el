@@ -32,7 +32,7 @@
 
 (setf org-html-head-extra
       (concat "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
-              "<link rel='stylesheet' href='./css/main.css' />"
+              ;; "<link rel='stylesheet' href='./css/main.css' />"
               ;; "<link rel='stylesheet' type='text/css' href='./css/code.css' />"
               ;; org-html-head-extra-postamble
               ))
