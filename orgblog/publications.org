@@ -1,14 +1,26 @@
 
+
 * Peer-Reviewed Conference and Workshop Papers
 
+** 2023
+
+*** [[file:pubs/stretching_ghc.pdf][Stretching the Glasgow Haskell Compiler: Nourishing GHC with Domain-Driven Design]]
+
+Authors: Jeffrey M. Young, Sylvain Henry, John Ericson
+Conference: /1st ACM SIGPLAN International Workshop on Functional Software Architecture. (FUNARCH), 2023/
+
 ** 2020
+
 ***  [[file:pubs/vsat.pdf][Variational Satisfiability Solving]]
+
   Authors: Jeffrey M. Young, Eric Walkingshaw, Thomas Thüm
   Conference: /ACM Int. Systems and Software Product Line Conf. (SPLC), 2020/
   Data: [[https://github.com/lambda-land/VSat-Papers/tree/master/SPLC2020][on github]]
 
 ** 2018
+
 *** [[file:pubs/sigcse18-algorithm-explanations.pdf][A Domain Analysis of Data Structure and Algorithm Explanations in the Wild]]
+
   Authors: Jeffrey M. Young and Eric Walkingshaw
   Conference: /ACM SIGCSE Technical Symp. on Computer Science Education (SIGCSE), 2018, 870–875/
   Data: [[https://github.com/lambda-land/XOP-Algorithms-Data][on github]]
@@ -18,6 +30,7 @@
 ** 2022
 
 *** Variational Satisfiability Solving: Solving Lots of Related SAT Problems
+
    Authors: Jeffrey M. Young, Paul Maximilian Bittner, Eric Walkingshaw,
    Thomas Thüm
    Journal: /Empirical Software Engineering ([[https://emsejournal.github.io/][EMSE]])/
@@ -28,10 +41,13 @@
 ** 2022
 
 *** White Paper: [[https://hsyl20.fr/home/files/papers/2022-ghc-modularity.pdf][Modularizing GHC]]
+
    Authors: Sylvain Henry, John Ericson, Jeffery M. Young
 
 ** 2021
+
 *** [[https://ir.library.oregonstate.edu/concern/graduate_thesis_or_dissertations/dv140182g][PhD Thesis: Variational Satisfiability Solving]]
+
    Authors: Jeffrey M. Young
 
 * Books
@@ -39,18 +55,44 @@
 ** 2022
 
 *** [[https://github.com/input-output-hk/hs-opt-handbook.github.io][Haskell Optimization Handbook]]
+
     Still in progress, will be hosted on the Haskell Foundation website
     eventually.
 
 * Talks
 
+** 2025
+
+*** [[https://www.youtube.com/live/FB0CS0X1QRc?si=1u_DEOrXryQOoh4R&t=26177][What is Functional Architecture]]
+
+    Conference: /FUNARCH 2025/
+
+*** [[https://www.youtube.com/live/FB0CS0X1QRc?si=-Aoa5WxZILYGaKB0&t=27678][Future of FUNARCH]]
+
+    Conference: /FUNARCH 2025/
+
 ** 2022
 
 *** [[https://github.com/input-output-hk/hs-opt-handbook.github.io][The Haskell Optimization Handbook]]
+
     Conference: /Haskell Implementors Workshop, (HiW), 2022/
 
 
 ** 2021
 
 *** [[https://youtu.be/dFDTzYsXu6c][Adventures in GHC Compile Times]]
+
     Conference: /Haskell Implementors Workshop, (HiW), 2021/
+
+* Service
+
+** 2025
+
+[[https://dl.acm.org/doi/proceedings/10.1145/3759163][Program Chair]]
+Conference: /3rd ACM SIGPLAN International Workshop on Functional Software Architecture. (FUNARCH), 2025/
+
+
+** 2024
+
+[[https://dl.acm.org/doi/proceedings/10.1145/3677998][Program Committee]]
+Conference: /2nd ACM SIGPLAN International Workshop on Functional Software Architecture. (FUNARCH), 2024/
