@@ -7,34 +7,19 @@
 (setf org-export-html-coding-system 'utf-8-unix)
 (setf org-html-htmlize-output-type 'css)
 
-(setq org-html-head-extra-postamble
-      "<style type=\"text/css\">
-  body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    margin: 5;
-    padding: 0;
-    line-height: 1.6;
-  }
-  #content {
-    flex-grow: 1; /* Pushes the postamble down */
-  }
-  #postamble {
-    padding: 1em;
-    text-align: center;
-    border-top: 1px solid #ccc;
-    display: flex; /* 1. Turn postamble into a horizontal flex container */
-    justify-content: center; /* 2. Center the group of links horizontally */
-    gap: 2em; /* 3. Add space *between* the items (the preferred, modern way) */
-  }
-</style>")
+(setq org-html-head-extra-preamble
+      "<style>
+            body {margin: 5% auto; background: #f2f2f2; color: #444444; font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.8; text-shadow: 0 1px 0 #ffffff; max-width: 73%;}
+            code {background: white;}
+            a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
+            a:hover {border-bottom: 0;}
+        </style>")
 
 (setf org-html-head-extra
       (concat "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
               ;; "<link rel='stylesheet' href='./css/main.css' />"
               ;; "<link rel='stylesheet' type='text/css' href='./css/code.css' />"
-              ;; org-html-head-extra-postamble
+              org-html-head-extra-preamble
               ))
 
 (setf org-html-home/up-format "")
