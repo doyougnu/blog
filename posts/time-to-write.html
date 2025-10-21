@@ -7,12 +7,27 @@
 <title>Time To Write</title>
 <meta name="generator" content="Org Mode" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-            body {margin: 5% auto; background: #f2f2f2; color: #444444; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.8; text-shadow: 0 1px 0 #ffffff; max-width: 73%;}
-            code {background: white;}
-            a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
-            a:hover {border-bottom: 0;}
-        </style>
+ <style>
+	@media (prefers-color-scheme: dark){
+		body {
+			background:#000
+		}
+	}
+	body{
+		margin:1em auto;
+		max-width:40em;
+		padding:0 .62em 3.24em;
+		font:1.2em/1.62 sans-serif
+	}
+	h1,h2,h3 {
+		line-height:1.2
+	}
+	@media print{
+		body{
+			max-width:none
+		}
+	}
+</style>
 </head>
 <body>
 <div id="content" class="content">
@@ -21,9 +36,9 @@
 <span class="subtitle">It has been awhile!</span>
 </h1>
 
-<div id="outline-container-orge731f5d" class="outline-2">
-<h2 id="orge731f5d">The need to begin writing again!</h2>
-<div class="outline-text-2" id="text-orge731f5d">
+<div id="outline-container-org6f1f01b" class="outline-2">
+<h2 id="org6f1f01b">The need to begin writing again!</h2>
+<div class="outline-text-2" id="text-org6f1f01b">
 <div class="org-src-container">
 <pre class="src src-haskell">the :: ExprPrim
 the t dest stx = do
