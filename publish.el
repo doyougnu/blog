@@ -98,7 +98,7 @@
 (setf org-html-link-home "")
 (setf org-html-scripts "")
 (setf org-html-preamble  nil)
-(setf org-html-postamble nil)
+(setf org-html-postamble t)
 (setf org-html-indent nil)
 (setf org-export-preserve-breaks nil)
 (setf org-src-preserve-indentation nil)
@@ -115,18 +115,30 @@
 (setf org-html-doctype "html5")
 (setf org-export-date-timestamp-format "%d %B %Y")
 
+(setq org-html-postamble-format
+      '(("en" "<hr>
+               <div class='author-info' style='text-align:center; margin-top: 2em; font-style: italic;'>
+                 Written by <a href='/me.html' class='author-link'>%a</a>
+                 on <span class='timestamp'>%d</span>
+               </div>
+               <div class='botnav' style='text-align:center; margin-top: 2em;'>
+                  <a href='/index.html'>Blog</a>
+                  <a href='/publications.html'>Publications</a>
+                  <a href='https://github.com/doyougnu'>Github</a>
+                  <a href='/me.html'>About</a>
+               </div>")))
 
-(defconst postamble
-  (concat
-   "<hr>
-       <div class=\"botnav\" style=\"text-align:center; margin-top: 10em;\">
-          <a href='/index.html'>Blog</a>
-          <a href='/publications.html'>Publications</a>
-          <a href='https://github.com/doyougnu'>Github</a>
-          <a href='/me.html'>About</a>
-        </div> "))
+;; (defconst postamble
+;;   (concat
+;;    "<hr>
+;;        <div class=\"botnav\" style=\"text-align:center; margin-top: 10em;\">
+;;           <a href='/index.html'>Blog</a>
+;;           <a href='/publications.html'>Publications</a>
+;;           <a href='https://github.com/doyougnu'>Github</a>
+;;           <a href='/me.html'>About</a>
+;;         </div> "))
 
-(setf org-html-postamble postamble)
+;; (setf org-html-postamble postamble)
 
 (setq org-publish-project-alist
       `(("org-pages"
@@ -135,13 +147,13 @@
          :publishing-directory "./build"
          :recursive t
          :publishing-function org-html-publish-to-html
-         ;; :html-preamble preamble
          :headline-levels 1
-         ;; :html-head "<style>body { max-width: 80ch; margin-left: auto; margin-right: auto; padding: 2em; line-height: 1.6; }</style>"
          :section-numbers nil
          :with-toc nil
-         :with-author nil
-         :with-creator nil)
+         :with-author t
+         :with-date t
+         :time-stamp-file t
+         :with-creator t)
 
         ("org-static"
          :base-directory "./orgblog"
