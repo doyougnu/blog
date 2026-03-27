@@ -1,15 +1,16 @@
 #+TITLE: About
-#+DATE: <2020-11-08 Sun>
+#+DATE: <2026-03-27 Fri>
 #+SUBTITLE:
 #+OPTIONS: H:1 toc:nil num:nil
 
-* How do you buy food and shelter?
+* What have you worked on?
 
-I work on the Verse Programming Language for Epic Games. All views on this blog are my own.
+I'm a former academic, programming language researcher, compiler engineer,
+systems programmer and tinkerer. You can find my linkedin [[www.linkedin.com/in/jeffrey-young-ph-d-17b97566][here]].
 
 * How to contact you?
 
-jeff at pure-systems.org
+I'm on the job market at the moment. You can reach me at jeff at pure-systems.org
 
 * Why "doyougnu" for everything online?
 
