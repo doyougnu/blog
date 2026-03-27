@@ -28,13 +28,14 @@
 (setq-default color-theme-is-global t)
 (setq font-lock-always-fontify t)
 
-;; Create a "pseudo-frame" so htmlize has a palette to pull from
-(if (not (display-graphic-p))
-    (setq-default frame-background-mode 'light)) ;; or 'dark
+;; 2. Initialize the "face" system (crucial for scripts)
+(unless (display-graphic-p)
+  (defun display-graphic-p (&optional display) t))
 
 ;; Load a built-in theme so there are actual colors to export
 ;; 'tango' or 'adwaita' are clean and built-in to Emacs
 (load-theme 'tango t)
+
 (setq org-html-head-extra-preamble
       "<style>
             body {
