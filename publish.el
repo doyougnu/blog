@@ -4,16 +4,87 @@
 (require 'ox-html)
 (require 'ox-publish)
 
+
+;; Add this to your publish.el for the languages you use
+(use-package zig-mode :ensure t)
+(use-package haskell-mode :ensure t)
+(add-to-list 'org-src-lang-modes '("haskell" . haskell))
+(setq org-export-with-smart-quotes t) ;; Not strictly necessary but helps with parsing
+(setq org-html-htmlize-font-prefix "org-") ;; Ensures consistent class naming
+(setq font-lock-always-fontify t)
+(setq italic-annotations-face 'italic)
+(global-font-lock-mode 1)
+
+;; Crucial: htmlize needs a 'frame' to pull colors from.
+;; Without this, it often exports 'white on white' or 'black on black'.
+(if (not window-system)
+    (setq frame-background-mode 'light))
+
+(setq org-src-fontify-natively t) ;; Essential for Org to colorize blocks
 (setf org-export-html-coding-system 'utf-8-unix)
 (setf org-html-htmlize-output-type 'css)
 
+;; Force Emacs to act like it has a 256-color display
+(setq-default color-theme-is-global t)
+(setq font-lock-always-fontify t)
+
+;; Create a "pseudo-frame" so htmlize has a palette to pull from
+(if (not (display-graphic-p))
+    (setq-default frame-background-mode 'light)) ;; or 'dark
+
+;; Load a built-in theme so there are actual colors to export
+;; 'tango' or 'adwaita' are clean and built-in to Emacs
+(load-theme 'tango t)
 (setq org-html-head-extra-preamble
       "<style>
-            body {margin: 5% auto; background: ##fafafa; color: #444444; font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.8; text-shadow: 0 1px 0 #ffffff; max-width: 73%;}
-            code {background: white;}
-            a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
-            a:hover {border-bottom: 0;}
+            body {
+                margin: 0 auto;
+                padding: 2rem 1rem;
+                background: #fafafa;
+                color: #444444;
+                font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif;
+                font-size: 16px;
+                line-height: 1.8;
+                text-shadow: 0 1px 0 #ffffff;
+                max-width: 80ch;
+            }
+            /* Light grey background for code blocks */
+            pre.src {
+                background-color: #f5f5f5;
+                color: #333;
+                padding: 1.2em;
+                border: 1px solid #e0e0e0;
+                border-radius: 4px;
+                overflow-x: auto;
+                font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+                font-size: 0.9em;
+            }
+            code {
+                background: #f5f5f5;
+                padding: 2px 4px;
+                border-radius: 3px;
+            }
+            /* Haskell Specific Syntax Colors */
+            .org-haskell-keyword     { color: #a71d5d; font-weight: bold; } /* newtype, where, let */
+            .org-haskell-type        { color: #0086b3; }                   /* SBV, SVal, Int */
+            .org-haskell-constructor { color: #63a35c; font-weight: bold; } /* SBV (the constructor) */
+            .org-haskell-operator    { color: #333333; }                   /* ::, =, -> */
+            .org-haskell-definition  { color: #795da3; }                   /* unSBV */
+            .org-doc                 { color: #969896; font-style: italic; } /* -- | comments */
+
+
+            /* Essential Syntax Colors for the 'css' output type */
+            .org-keyword { color: #a71d5d; font-weight: bold; }
+            .org-string  { color: #183691; }
+            .org-comment { color: #969896; font-style: italic; }
+            .org-type    { color: #0086b3; }
+            .org-function-name { color: #795da3; }
+            .org-variable-name { color: #ed6a43; }
+
+            a { border-bottom: 1px solid #444444; color: #444444; text-decoration: none; }
+            a:hover { border-bottom: 0; }
         </style>")
+
 
 (setf org-html-head-extra
       (concat "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n"
@@ -29,9 +100,8 @@
 (setf org-html-preamble  nil)
 (setf org-html-postamble nil)
 (setf org-html-indent nil)
-(setf org-export-preserve-breaks t)
+(setf org-export-preserve-breaks nil)
 (setf org-src-preserve-indentation nil)
-(setf org-src-fontify-natively nil)
 
 (setf org-html-metadata-timestamp-format "%d %B %Y")
 (setf org-export-date-timestamp-format "%d %B %Y")
@@ -49,7 +119,7 @@
 (defconst postamble
   (concat
    "<hr>
-       <div class=\"botnav\" style=\"text-align:center; margin-top: 1em;\">
+       <div class=\"botnav\" style=\"text-align:center; margin-top: 10em;\">
           <a href='/index.html'>Blog</a>
           <a href='/publications.html'>Publications</a>
           <a href='https://github.com/doyougnu'>Github</a>
@@ -67,6 +137,7 @@
          :publishing-function org-html-publish-to-html
          ;; :html-preamble preamble
          :headline-levels 1
+         ;; :html-head "<style>body { max-width: 80ch; margin-left: auto; margin-right: auto; padding: 2em; line-height: 1.6; }</style>"
          :section-numbers nil
          :with-toc nil
          :with-author nil

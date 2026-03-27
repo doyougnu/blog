@@ -1,0 +1,262 @@
+#+title: The Type Theorists need to take a look at Zig
+#+date: 2026-03-27
+#+author: Jeffrey Young
+#+filetags:
+
+I've recently been porting the [[https://hackage-content.haskell.org/package/sbv-13.6][sbv]] library (of which I was a major contributor
+to) to Zig. Why? Several reasons: I think the cost of formal methods has
+drastically reduced because of LLMs. I think Zig is a really good and promising
+language that I want to succeed and the best way to do that is to write
+interesting software in it. And because I want to write a symbolic execution
+engine that targets Zig.
+
+If you know me, you'll know I'm pretty deep into the Haskell-verse and have been
+for many years. One of the many things I love about Haskell is that after enough
+time in the language you get really good at programming the type system to [[https://functional-architecture.org/][make
+illegal states unrepresentable]]. Note that I said /program/ the type system. You
+typically program the type system to match your domain which then allows the
+compiler to catch all kinds of gnarly bugs at compile time. This is one of the
+key payoffs for an expressive strong and static type system.
+
+But there has always been a little wrinkle in this story. The type system is
+a logic programming paradigm that is based on unification and backtracking. This
+means that you are (rightfully) limited in what you can program at the type
+level. Of course there are [[https://www.stevenleiva.com/posts/gadts][ways]] to push more and more into type system and even
+[[https://lexi-lambda.github.io/blog/2021/03/25/an-introduction-to-typeclass-metaprogramming/][generate]] term-level data in the type system that you can then use at runtime.
+But these are always rather large increases in the complexity of the code base.
+
+Enter [[https://ziglang.org/][Zig]] and its concept of ~comptime~. Now Zig firmly comes from the
+[[https://tomasp.net/academic/drafts/cultures/cultures.pdf][engineering]] culture of programming languages and is mainly concerned with
+low-level details that most Haskell programmers and type theorists never think
+twice about. But god dammit Zig is punches way above its weight precisely
+because it shifts my position as a programmer from a /user/ of the type system
+to an /operator/. It gives me the raw tools to program the type system as I see
+fit, for my system and for my domain. And god dammit its radicalizing me.
+
+Here is an example. In porting sbv, I want to have a type that represents
+~Symbolic~ values. These are logic variables that are known to the underlying
+SAT/SMT solver but that carry a type. So the type must denote both of those
+aspects: that the term I'm typing belongs to the SAT/SMT solver and the type of
+the term /in the solver/. Sbv does this in the typical Haskell way using
+phantom types to tag the symbolic value:
+
+#+begin_src haskell
+-- | The "Symbolic" value. The parameter @a@ is phantom, but is
+-- extremely important in keeping the user interface strongly typed.
+newtype SBV a = SBV { unSBV :: SVal }
+
+-- | A symbolic boolean/bit
+type SBool   = SBV Bool
+#+end_src
+
+Now that we have in ~SBool~ we can start to write our type safe api. For
+example, the logical ~and~ function should take two ~SBool~ and return
+an ~SBool~, and the logical ~not~ should take an ~SBool~ and return as ~SBool~:
+
+#+begin_src haskell
+  -- | Symbolic boolean negation
+  sNot :: SBool -> SBool
+  sNot = ...
+
+  -- | Symbolic conjunction
+  (.&&) :: SBool -> SBool -> SBool
+  (.&&) ...
+#+end_src
+
+and this is enforced in the type system and ill-typed arguments would be caught
+at compile time.
+
+To write this in Zig we need to be able to write a ~newtype~, to create a
+nominal type, write a type synonym and then implement phantom types. These are
+all possible, and dare I say easy:
+
+#+begin_src zig
+  /// A type constructor for symbolic values. A is a phantom.
+  fn Symbolic(comptime A: type) type {
+      return struct {
+          ast: z3_pkg.Ast
+      }
+  }
+
+  /// A symbolic bool
+  pub const SBool = Symbolic(bool);
+
+  ///
+  pub fn sAnd(self: SBool, other: SBool) SBool {
+      return .{ .ast = self.ast.@"and"(other.ast) };
+  }
+#+end_src
+
+~Symbolic~ is a type level function that at compile time takes the type ~A~ and
+returns a type. ~A~ is a phantom because its never used in the return struct; it
+solely holds information at the type level. ~z3_pkg.Ast~ is untyped and
+corresponds to ~sbv~'s ~SVal~ type. So our ~SBools~ are a new type constructed
+by the application of ~Symbolic~ to Zig's ~bool~ type. Finally ~sAnd~ is our
+binary symbolic conjunction, which takes two ~SBool~ and returns an ~SBool~. The
+actual body of ~sAnd~ is just a call into the untyped ~z3~ C FFI.
+
+Wonderful! That was easy! Perhaps a bit too easy. To really test Zig let's try
+to do the same tricks but for symbolic numerals. Numerals are more tricky
+because the symbolic operations must work on a range of types. For example here
+is the symbolic less-then in ~sbv~ uses type-classes:
+
+#+begin_src haskell
+  class (Mergeable a, EqSymbolic a) => OrdSymbolic a where
+  ...
+  -- | Symbolic less than or equal to.
+  (.<) :: a -> a -> SBool
+  ...
+#+end_src
+
+But Zig does not have any type-classes so what are we to do. Well let's take a
+step back and think about type-classes operationally. A type-class in Haskell
+serves several purposes: it provides instances which declare a type as a member
+of a set of types, it attaches methods to a type, and it programs the type
+system. For example, the type-class ~OrdSymbolic~ associates the type ~a~ with
+the set of types that have instances for ~OrdSymbolic~. ~(.<=)~ is then attached
+to each of these types through the type-class instances and type-class
+constraints. And finally ~OrdSymbolic~ is a type-level program that says to
+conclude ~OrdSymbolic a~ you need to provide me a ~Mergeable a~ and a
+~EqSymbolic a~. Well in Zig we can roll our own with some type level functions
+and constants:
+
+#+begin_src zig
+  // sLt is symbolic less-then (.<) in sbv
+  pub fn sLt(self: SNum(T), other: SNum(T)) SBool {
+    return .{ .ast = self.ast.lt(other.ast) };
+  }
+
+  // SNum is our type-class. It checks that T is a Num-like type
+  pub fn SNum(comptime T: type) type {
+    comptime if (!isNum(T)) @compileError(std.fmt.comptimePrint("SNum only supports numeric types, got: {}", .{T}));
+    return Symbolic(T);
+  }
+
+  // isNum is a helper function. This decides if T is a Num-like type.
+  fn isNum(comptime T: type) bool {
+      inline for (num_types) |N| {
+          if (T == N) return true;
+      }
+      return false;
+  }
+
+  // A type-level constant array of phantom tags
+  const num_types = .{ Integer, Int64, Word8, Real };
+#+end_src
+
+Let's go step by step. ~sLT~ is a term-level function that takes two ~SNum(T)~
+and concludes a ~SBool~. ~SNum~ is our type-class represented as a type-level
+function that takes a type ~T~ and returns a ~Symbolic(T)~. ~SNum~ works by
+checking via a ~comptime if~ that ~T~ has an instance. We implement instances
+with the helper function ~isNum~ which checks that ~T~ is a member of the
+~num_types~ static array. If it isn't /then we directly program/ the error
+message for the user. This is what I meant by treating me as an operator rather
+than a user. I have direct control over my own error messages at compile time
+for a type error in Zig. Just absolutely wonderful.
+
+So an instance in Haskell such as:
+
+#+begin_src haskell
+instance SNum Word16 where
+  ...
+#+end_src
+
+corresponds to
+
+#+begin_src zig
+  const num_types = .{..., Word16}
+#+end_src
+
+which places ~Word16~ into the set of types that ~SNum~ will accept. The check
+of ~isNum~ in ~SNum~ is only a membership check. But nothing stops us from
+adding more type-class constraints. We might easily add ~isOrd~ and
+~isMergeable~ just like ~sbv~ has done. Then these checks are preconditions to
+creating a ~SNum~ type. Just like we would have in Haskell. So in just a few
+lines we have a type-level system that allows us to program instances and
+program the type level. Albeit with an imperative type-level language rather
+than a logical one. Now I have not demonstrated associating methods to types,
+which I declared was one of the purposes of type-classes. Well Zig's structs
+already provide this. In fact in my quick and dirty prototype that is exactly
+how the ~Symbolic~ struct is written:
+
+#+begin_src zig
+  fn Symbolic(comptime T: type) type {
+    return struct {
+        ast: z3_pkg.Ast,
+
+        // =========================================================
+        // Symbolic Bools
+        // =========================================================
+        ...
+        pub fn sAnd(self: SBool, other: SBool) SBool {
+            return .{ .ast = self.ast.@"and"(other.ast) };
+        }
+
+        // =========================================================
+        // Symbolic Numerals
+        // =========================================================
+        ...
+        pub fn sLt(self: SNum(T), other: SNum(T)) SBool {
+            return .{ .ast = self.ast.lt(other.ast) };
+        }
+        ...
+    };
+
+#+end_src
+
+And this allows us to program like this:
+
+#+begin_src zig
+  ... // skipping initialization for now
+  const x: SInt64 = sInt64("x");
+  const y: SInt64 = sInt64("y");
+  const ten = int64(100);
+  solver.constrain(x.sAdd(y).sEq(ten)); // sAdd, sEq, sLt, sAnd are methods on Symbolic(T)
+
+  const result = solver.checkSat();
+  std.debug.print("Check result: {s}\n", .{@tagName(result)});
+
+  if (result == .sat) {
+      if (solver.getModel()) |model| {
+          defer model.deinit();
+          std.debug.print("Model:\n{s}\n", .{model.toString() orelse "(null)"});
+      }
+  }
+#+end_src
+
+which yields:
+
+#+begin_src
+zig build run-simple
+Check result: sat
+Model:
+y -> 0
+x -> 100
+#+end_src
+
+and let's say we have a type error:
+
+#+begin_src zig
+  ... // skipping initialization for now
+  const x: SInt64 = sInt64("x");
+  const y = sBool("y"); // <---- now a bool not an Int64!, the type signatures are optional
+  const ten = int64(100);
+  solver.constrain(x.sAdd(y).sEq(ten)); // <--- y should be a type-error
+  ...
+#+end_src
+
+which yields:
+
+#+begin_src
+$ zig build run-simple
+run-simple
++- run exe simple
+   +- compile exe simple Debug native 1 errors
+examples/puzzles/simple.zig:51:29: error: expected type 'types.Symbolic(types.Int64)', found 'types.Symbolic(bool)'
+    solver.constrain(x.sAdd(y).sEq(ten));
+                            ^
+#+end_src
+
+Pretty nice! Hopefully you can see why Zig is so exciting. In my opinion
+~comptime~ could be radically simpler system to reap a lot the value of advanced
+type systems such as Haskell's.

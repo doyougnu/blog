@@ -84,6 +84,18 @@ Conference: /1st ACM SIGPLAN International Workshop on Functional Software Archi
 
 * Service
 
+** 2026
+
+*** [[https://icfp26.sigplan.org/home/funarch-2026][Program Chair]]
+
+Conference: /4rd ACM SIGPLAN International Workshop on Functional Software Architecture. (FUNARCH), 2026/
+
+*** [[https://github.com/haskell/core-libraries-committee][Haskell Core Library Committee Member]]
+
+*** [[https://www.haskell.org/haskell-org-committee/][Haskell.org Committee Member]]
+
+*** [[https://github.com/ghc-proposals/ghc-proposals/#who-is-the-committee][Glasgow Haskell Compiler Steering Committee Member]]
+
 ** 2025
 
 *** [[https://dl.acm.org/doi/proceedings/10.1145/3759163][Program Chair]]

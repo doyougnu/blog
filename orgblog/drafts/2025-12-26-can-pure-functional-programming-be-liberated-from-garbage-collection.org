@@ -1,0 +1,9 @@
+#+title: Can pure functional programming be liberated from garbage collection
+#+date: 2025-12-26
+#+filetags: :draft:
+
+* Zig
+
+* The definition of pure, or, why is allocation not an effect?
+
+* arenas

@@ -1,0 +1,36 @@
+#+title: Why Haskell is my language of choice
+#+date: 2025-12-26
+#+filetags: :draft:
+
+tl;dr: Haskell is my language of choice because it is best in class in exploring
+the algebraic nature of the system I am building.
+
+There are two pieces of media that revolutionized my philosophy of my
+craft. First, is Jonathon Blow's talk in 2019 on the collapse of civilization
+and second is Conal Elliot's appearance on the type theory forall podcast.
+Blow's thesis is that without direct, consistent effort technology and
+technological know-how will decay. But in this talk, he describes game
+development as a ~craft~ and then states
+
+
+Elliot's thesis is that the act of programming is the
+construction of a device that allows us to peer into a platonic world of
+computation. His employs a microscope as a metaphor; the microscope is a device
+that we have built and it is only with that device that we discover, explore,
+and analyze the microscopic world. Similarly, a program is a device that we
+build that allows us to discover, explore and analyze the world of computation.
+
+Let's go through a worked example. Imagine you are trying to build something,
+anything, say a calculator app.
+
+* Type theory forall podcast
+
+* microscopes
+
+* types as exploration
+
+* A push towards the algebraic
+
+* TODO link the podcast
+
+* TODO link conal's page
