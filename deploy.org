@@ -1,17 +1,16 @@
+
+
 * To Deploy
-** Source code highlighting
-   You have to run ~doyougnu/publish~ in an ~ielm~ repl or else the fonts won't
-load
 
 ** Build the site
-   This will rebuild the =public_html= directory. This will not apply syntax
-   highlighting to the source code blocks though
 
    #+begin_src
-   emacs -q --script publish.el -f doyougnu/publish
+   nix build .#default
    #+end_src
 
+the artifacts are in ~result~ like normal for nix.
+
 ** Deploy to remote
+
 deployment is done via github actions. This is very hacky but for our needs it
 works well. Read through ~.github/workflows/deploy.yml~ for a precise description.
-We simply use an ubuntu container, install emacs, and run the ~publish.el~ script
