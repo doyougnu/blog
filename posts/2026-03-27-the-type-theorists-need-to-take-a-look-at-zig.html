@@ -108,12 +108,12 @@ phantom types to tag the symbolic value:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell">-- | The "Symbolic" value. The parameter @a@ is phantom, but is
+<pre class="src src-haskell"><span class="org-doc">-- | The "Symbolic" value. The parameter @a@ is phantom, but is
 -- extremely important in keeping the user interface strongly typed.
-newtype SBV a = SBV { unSBV :: SVal }
+</span><span class="org-haskell-keyword">newtype</span> <span class="org-haskell-type">SBV</span> a <span class="org-haskell-operator">=</span> <span class="org-haskell-constructor">SBV</span> { unSBV <span class="org-haskell-operator">::</span> <span class="org-haskell-type">SVal</span> }
 
--- | A symbolic boolean/bit
-type SBool   = SBV Bool
+<span class="org-doc">-- | A symbolic boolean/bit
+</span><span class="org-haskell-keyword">type</span> <span class="org-haskell-type">SBool</span>   <span class="org-haskell-operator">=</span> <span class="org-haskell-type">SBV</span> <span class="org-haskell-type">Bool</span>
 </pre>
 </div>
 
@@ -124,13 +124,13 @@ an <code>SBool</code>, and the logical <code>not</code> should take an <code>SBo
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell">-- | Symbolic boolean negation
-sNot :: SBool -&gt; SBool
-sNot = ...
+<pre class="src src-haskell"><span class="org-doc">-- | Symbolic boolean negation
+</span><span class="org-haskell-definition">sNot</span> <span class="org-haskell-operator">::</span> <span class="org-haskell-type">SBool</span> <span class="org-haskell-operator">-&gt;</span> <span class="org-haskell-type">SBool</span>
+<span class="org-haskell-definition">sNot</span> <span class="org-haskell-operator">=</span> <span class="org-haskell-operator">...</span>
 
--- | Symbolic conjunction
-(.&amp;&amp;) :: SBool -&gt; SBool -&gt; SBool
-(.&amp;&amp;) ...
+<span class="org-doc">-- | Symbolic conjunction
+</span>(<span class="org-haskell-definition">.&amp;&amp;</span>) <span class="org-haskell-operator">::</span> <span class="org-haskell-type">SBool</span> <span class="org-haskell-operator">-&gt;</span> <span class="org-haskell-type">SBool</span> <span class="org-haskell-operator">-&gt;</span> <span class="org-haskell-type">SBool</span>
+(<span class="org-haskell-definition">.&amp;&amp;</span>) <span class="org-haskell-operator">...</span>
 </pre>
 </div>
 
@@ -146,19 +146,19 @@ all possible, and dare I say easy:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-zig">/// A type constructor for symbolic values. A is a phantom.
-fn Symbolic(comptime A: type) type {
-    return struct {
-        ast: z3_pkg.Ast
+<pre class="src src-zig"><span class="org-doc">/// A type constructor for symbolic values. A is a phantom.
+</span><span class="org-keyword">fn</span> <span class="org-function-name">Symbolic</span>(<span class="org-keyword">comptime</span> <span class="org-variable-name">A</span>: <span class="org-type">type</span>) <span class="org-type">type</span> {
+    <span class="org-keyword">return</span> <span class="org-keyword">struct</span> {
+        <span class="org-variable-name">ast</span>: <span class="org-type">z3_pkg.Ast</span>
     }
 }
 
-/// A symbolic bool
-pub const SBool = Symbolic(bool);
+<span class="org-doc">/// A symbolic bool
+</span><span class="org-keyword">pub</span> <span class="org-keyword">const</span> <span class="org-variable-name">SBool</span> = Symbolic(<span class="org-type">bool</span>);
 
-///
-pub fn sAnd(self: SBool, other: SBool) SBool {
-    return .{ .ast = self.ast.@"and"(other.ast) };
+<span class="org-doc">///
+</span><span class="org-keyword">pub</span> <span class="org-keyword">fn</span> <span class="org-function-name">sAnd</span>(<span class="org-variable-name">self</span>: <span class="org-type">SBool</span>, <span class="org-variable-name">other</span>: <span class="org-type">SBool</span>) SBool {
+    <span class="org-keyword">return</span> .{ .ast = self.ast.@<span class="org-string">"and"</span>(other.ast) };
 }
 </pre>
 </div>
@@ -181,11 +181,11 @@ is the symbolic less-then in <code>sbv</code> uses type-classes:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell">class (Mergeable a, EqSymbolic a) =&gt; OrdSymbolic a where
-...
--- | Symbolic less than or equal to.
-(.&lt;) :: a -&gt; a -&gt; SBool
-...
+<pre class="src src-haskell"><span class="org-haskell-keyword">class</span> (<span class="org-haskell-type">Mergeable</span> a, <span class="org-haskell-type">EqSymbolic</span> a) <span class="org-haskell-operator">=&gt;</span> <span class="org-haskell-type">OrdSymbolic</span> a <span class="org-haskell-keyword">where</span>
+<span class="org-haskell-operator">...</span>
+<span class="org-doc">-- | Symbolic less than or equal to.
+</span>(<span class="org-haskell-definition">.&lt;</span>) <span class="org-haskell-operator">::</span> a <span class="org-haskell-operator">-&gt;</span> a <span class="org-haskell-operator">-&gt;</span> <span class="org-haskell-type">SBool</span>
+<span class="org-haskell-operator">...</span>
 </pre>
 </div>
 
@@ -204,27 +204,27 @@ and constants:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-zig">// sLt is symbolic less-then (.&lt;) in sbv
-pub fn sLt(self: SNum(T), other: SNum(T)) SBool {
-  return .{ .ast = self.ast.lt(other.ast) };
+<pre class="src src-zig"><span class="org-comment-delimiter">// </span><span class="org-comment">sLt is symbolic less-then (.&lt;) in sbv
+</span><span class="org-keyword">pub</span> <span class="org-keyword">fn</span> <span class="org-function-name">sLt</span>(<span class="org-variable-name">self</span>: <span class="org-type">SNum</span>(T), <span class="org-variable-name">other</span>: <span class="org-type">SNum</span>(T)) SBool {
+  <span class="org-keyword">return</span> .{ .ast = self.ast.lt(other.ast) };
 }
 
-// SNum is our type-class. It checks that T is a Num-like type
-pub fn SNum(comptime T: type) type {
-  comptime if (!isNum(T)) @compileError(std.fmt.comptimePrint("SNum only supports numeric types, got: {}", .{T}));
-  return Symbolic(T);
+<span class="org-comment-delimiter">// </span><span class="org-comment">SNum is our type-class. It checks that T is a Num-like type
+</span><span class="org-keyword">pub</span> <span class="org-keyword">fn</span> <span class="org-function-name">SNum</span>(<span class="org-keyword">comptime</span> <span class="org-variable-name">T</span>: <span class="org-type">type</span>) <span class="org-type">type</span> {
+  <span class="org-keyword">comptime</span> <span class="org-keyword">if</span> (!isNum(T)) <span class="org-builtin">@compileError</span>(std.fmt.comptimePrint(<span class="org-string">"SNum only supports numeric types, got: {}"</span>, .{T}));
+  <span class="org-keyword">return</span> Symbolic(T);
 }
 
-// isNum is a helper function. This decides if T is a Num-like type.
-fn isNum(comptime T: type) bool {
-    inline for (num_types) |N| {
-        if (T == N) return true;
+<span class="org-comment-delimiter">// </span><span class="org-comment">isNum is a helper function. This decides if T is a Num-like type.
+</span><span class="org-keyword">fn</span> <span class="org-function-name">isNum</span>(<span class="org-keyword">comptime</span> <span class="org-variable-name">T</span>: <span class="org-type">type</span>) <span class="org-type">bool</span> {
+    <span class="org-keyword">inline</span> <span class="org-keyword">for</span> (num_types) |N| {
+        <span class="org-keyword">if</span> (T == N) <span class="org-keyword">return</span> <span class="org-constant">true</span>;
     }
-    return false;
+    <span class="org-keyword">return</span> <span class="org-constant">false</span>;
 }
 
-// A type-level constant array of phantom tags
-const num_types = .{ Integer, Int64, Word8, Real };
+<span class="org-comment-delimiter">// </span><span class="org-comment">A type-level constant array of phantom tags
+</span><span class="org-keyword">const</span> <span class="org-variable-name">num_types</span> = .{ Integer, Int64, Word8, Real };
 </pre>
 </div>
 
@@ -245,8 +245,8 @@ So an instance in Haskell such as:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-haskell">instance SNum Word16 where
-  ...
+<pre class="src src-haskell"><span class="org-haskell-keyword">instance</span> <span class="org-haskell-type">SNum</span> <span class="org-haskell-type">Word16</span> <span class="org-haskell-keyword">where</span>
+  <span class="org-haskell-operator">...</span>
 </pre>
 </div>
 
@@ -255,7 +255,7 @@ corresponds to
 </p>
 
 <div class="org-src-container">
-<pre class="src src-zig">const num_types = .{..., Word16}
+<pre class="src src-zig"><span class="org-keyword">const</span> <span class="org-variable-name">num_types</span> = .{..., Word16}
 </pre>
 </div>
 
@@ -274,24 +274,24 @@ how the <code>Symbolic</code> struct is written:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-zig">fn Symbolic(comptime T: type) type {
-  return struct {
-      ast: z3_pkg.Ast,
+<pre class="src src-zig"><span class="org-keyword">fn</span> <span class="org-function-name">Symbolic</span>(<span class="org-keyword">comptime</span> <span class="org-variable-name">T</span>: <span class="org-type">type</span>) <span class="org-type">type</span> {
+  <span class="org-keyword">return</span> <span class="org-keyword">struct</span> {
+      <span class="org-variable-name">ast</span>: <span class="org-type">z3_pkg.Ast</span>,
 
-      // =========================================================
-      // Symbolic Bools
-      // =========================================================
-      ...
-      pub fn sAnd(self: SBool, other: SBool) SBool {
-          return .{ .ast = self.ast.@"and"(other.ast) };
+      <span class="org-comment-delimiter">// </span><span class="org-comment">=========================================================
+</span>      <span class="org-comment-delimiter">// </span><span class="org-comment">Symbolic Bools
+</span>      <span class="org-comment-delimiter">// </span><span class="org-comment">=========================================================
+</span>      ...
+      <span class="org-keyword">pub</span> <span class="org-keyword">fn</span> <span class="org-function-name">sAnd</span>(<span class="org-variable-name">self</span>: <span class="org-type">SBool</span>, <span class="org-variable-name">other</span>: <span class="org-type">SBool</span>) SBool {
+          <span class="org-keyword">return</span> .{ .ast = self.ast.@<span class="org-string">"and"</span>(other.ast) };
       }
 
-      // =========================================================
-      // Symbolic Numerals
-      // =========================================================
-      ...
-      pub fn sLt(self: SNum(T), other: SNum(T)) SBool {
-          return .{ .ast = self.ast.lt(other.ast) };
+      <span class="org-comment-delimiter">// </span><span class="org-comment">=========================================================
+</span>      <span class="org-comment-delimiter">// </span><span class="org-comment">Symbolic Numerals
+</span>      <span class="org-comment-delimiter">// </span><span class="org-comment">=========================================================
+</span>      ...
+      <span class="org-keyword">pub</span> <span class="org-keyword">fn</span> <span class="org-function-name">sLt</span>(<span class="org-variable-name">self</span>: <span class="org-type">SNum</span>(T), <span class="org-variable-name">other</span>: <span class="org-type">SNum</span>(T)) SBool {
+          <span class="org-keyword">return</span> .{ .ast = self.ast.lt(other.ast) };
       }
       ...
   };
@@ -304,19 +304,19 @@ And this allows us to program like this:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-zig">... // skipping initialization for now
-const x: SInt64 = sInt64("x");
-const y: SInt64 = sInt64("y");
-const ten = int64(100);
-solver.constrain(x.sAdd(y).sEq(ten)); // sAdd, sEq, sLt, sAnd are methods on Symbolic(T)
+<pre class="src src-zig">... <span class="org-comment-delimiter">// </span><span class="org-comment">skipping initialization for now
+</span><span class="org-keyword">const</span> <span class="org-variable-name">x</span>: <span class="org-type">SInt64</span> = sInt64(<span class="org-string">"x"</span>);
+<span class="org-keyword">const</span> <span class="org-variable-name">y</span>: <span class="org-type">SInt64</span> = sInt64(<span class="org-string">"y"</span>);
+<span class="org-keyword">const</span> <span class="org-variable-name">ten</span> = int64(100);
+solver.constrain(x.sAdd(y).sEq(ten)); <span class="org-comment-delimiter">// </span><span class="org-comment">sAdd, sEq, sLt, sAnd are methods on Symbolic(T)
+</span>
+<span class="org-keyword">const</span> <span class="org-variable-name">result</span> = solver.checkSat();
+std.debug.print(<span class="org-string">"Check result: {s}\n"</span>, .{<span class="org-builtin">@tagName</span>(result)});
 
-const result = solver.checkSat();
-std.debug.print("Check result: {s}\n", .{@tagName(result)});
-
-if (result == .sat) {
-    if (solver.getModel()) |model| {
-        defer model.deinit();
-        std.debug.print("Model:\n{s}\n", .{model.toString() orelse "(null)"});
+<span class="org-keyword">if</span> (result == .sat) {
+    <span class="org-keyword">if</span> (solver.getModel()) |model| {
+        <span class="org-keyword">defer</span> model.deinit();
+        std.debug.print(<span class="org-string">"Model:\n{s}\n"</span>, .{model.toString() <span class="org-keyword">orelse</span> <span class="org-string">"(null)"</span>});
     }
 }
 </pre>
@@ -326,25 +326,26 @@ if (result == .sat) {
 which yields:
 </p>
 
-<pre class="example">
-zig build run-simple
+<div class="org-src-container">
+<pre class="src src-nil">zig build run-simple
 Check result: sat
 Model:
 y -&gt; 0
 x -&gt; 100
 </pre>
+</div>
 
 <p>
 and let&rsquo;s say we have a type error:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-zig">... // skipping initialization for now
-const x: SInt64 = sInt64("x");
-const y = sBool("y"); // &lt;---- now a bool not an Int64!, the type signatures are optional
-const ten = int64(100);
-solver.constrain(x.sAdd(y).sEq(ten)); // &lt;--- y should be a type-error
-...
+<pre class="src src-zig">... <span class="org-comment-delimiter">// </span><span class="org-comment">skipping initialization for now
+</span><span class="org-keyword">const</span> <span class="org-variable-name">x</span>: <span class="org-type">SInt64</span> = sInt64(<span class="org-string">"x"</span>);
+<span class="org-keyword">const</span> <span class="org-variable-name">y</span> = sBool(<span class="org-string">"y"</span>); <span class="org-comment-delimiter">// </span><span class="org-comment">&lt;---- now a bool not an Int64!, the type signatures are optional
+</span><span class="org-keyword">const</span> <span class="org-variable-name">ten</span> = int64(100);
+solver.constrain(x.sAdd(y).sEq(ten)); <span class="org-comment-delimiter">// </span><span class="org-comment">&lt;--- y should be a type-error
+</span>...
 </pre>
 </div>
 
@@ -352,8 +353,8 @@ solver.constrain(x.sAdd(y).sEq(ten)); // &lt;--- y should be a type-error
 which yields:
 </p>
 
-<pre class="example">
-$ zig build run-simple
+<div class="org-src-container">
+<pre class="src src-nil">$ zig build run-simple
 run-simple
 +- run exe simple
    +- compile exe simple Debug native 1 errors
@@ -361,6 +362,7 @@ examples/puzzles/simple.zig:51:29: error: expected type 'types.Symbolic(types.In
     solver.constrain(x.sAdd(y).sEq(ten));
                             ^
 </pre>
+</div>
 
 <p>
 Pretty nice! Hopefully you can see why Zig is so exciting. In my opinion
