@@ -1,17 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 24 December 2025 -->
+<!-- 27 March 2026 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Time To Write</title>
 <meta name="generator" content="Org Mode" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-            body {margin: 5% auto; background: ##fafafa; color: #444444; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.8; text-shadow: 0 1px 0 #ffffff; max-width: 73%;}
-            code {background: white;}
-            a {border-bottom: 1px solid #444444; color: #444444; text-decoration: none;}
-            a:hover {border-bottom: 0;}
+            body {
+                margin: 0 auto;
+                padding: 2rem 1rem;
+                background: #fafafa;
+                color: #444444;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                font-size: 16px;
+                line-height: 1.8;
+                text-shadow: 0 1px 0 #ffffff;
+                max-width: 80ch;
+            }
+            /* Light grey background for code blocks */
+            pre.src {
+                background-color: #f5f5f5;
+                color: #333;
+                padding: 1.2em;
+                border: 1px solid #e0e0e0;
+                border-radius: 4px;
+                overflow-x: auto;
+                font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+                font-size: 0.9em;
+            }
+            code {
+                background: #f5f5f5;
+                padding: 2px 4px;
+                border-radius: 3px;
+            }
+            /* Haskell Specific Syntax Colors */
+            .org-haskell-keyword     { color: #a71d5d; font-weight: bold; } /* newtype, where, let */
+            .org-haskell-type        { color: #0086b3; }                   /* SBV, SVal, Int */
+            .org-haskell-constructor { color: #63a35c; font-weight: bold; } /* SBV (the constructor) */
+            .org-haskell-operator    { color: #333333; }                   /* ::, =, -> */
+            .org-haskell-definition  { color: #795da3; }                   /* unSBV */
+            .org-doc                 { color: #969896; font-style: italic; } /* -- | comments */
+
+
+            /* Essential Syntax Colors for the 'css' output type */
+            .org-keyword { color: #a71d5d; font-weight: bold; }
+            .org-string  { color: #183691; }
+            .org-comment { color: #969896; font-style: italic; }
+            .org-type    { color: #0086b3; }
+            .org-function-name { color: #795da3; }
+            .org-variable-name { color: #ed6a43; }
+
+            a { border-bottom: 1px solid #444444; color: #444444; text-decoration: none; }
+            a:hover { border-bottom: 0; }
         </style>
 </head>
 <body>
@@ -21,9 +63,9 @@
 <span class="subtitle">It has been awhile!</span>
 </h1>
 
-<div id="outline-container-org213b861" class="outline-2">
-<h2 id="org213b861">Some code</h2>
-<div class="outline-text-2" id="text-org213b861">
+<div id="outline-container-orge5aba43" class="outline-2">
+<h2 id="orge5aba43">Some code</h2>
+<div class="outline-text-2" id="text-orge5aba43">
 <div class="org-src-container">
 <pre class="src src-haskell">the :: ExprPrim
 the t dest stx = do
@@ -39,7 +81,7 @@ the t dest stx = do
 </div>
 <div id="postamble" class="status">
 <hr>
-       <div class="botnav" style="text-align:center; margin-top: 1em;">
+       <div class="botnav" style="text-align:center; margin-top: 10em;">
           <a href='/index.html'>Blog</a>
           <a href='/publications.html'>Publications</a>
           <a href='https://github.com/doyougnu'>Github</a>
