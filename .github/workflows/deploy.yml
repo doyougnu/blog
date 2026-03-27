@@ -3,23 +3,32 @@ on:
   push:
     branches:
       - master
+
 jobs:
   build-and-deploy:
-    concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
+    concurrency: ci-${{ github.ref }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout deploy
-        uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4 # Updated to v4 for Node 20 support
 
-      - name: Install and Build 🔧
-        run: |
-          sudo apt-get install emacs
-          emacs -q --script publish.el -f doyougnu/publish
-          pwd
+      - name: Install Nix ❄️
+        uses: cachix/install-nix-action@v25
+        with:
+          # This ensures we pull pre-compiled Emacs from the community cache
+          extra_nix_config: |
+            extra-substituters = https://nix-community.cachix.org
+            extra-trusted-public-keys = nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=
+
+      - name: Build with Nix 🛠️
+        # This runs your buildPhase/installPhase defined in the flake
+        run: nix build .#default
 
       - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4.3.0
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: deploy # The branch the action should deploy to.
-          folder: build # The folder the action should deploy.
+          branch: deploy
+          # Nix 'installPhase' puts files in $out, which 'nix build'
+          # links to a local folder named 'result'
+          folder: result
           clean: true

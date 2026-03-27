@@ -1,9 +1,20 @@
+;; --- publish.el ---
+(require 'package)
 (package-initialize)
+
+(require 'htmlize)
+(require 'zig-mode)
+(require 'haskell-mode)
 (require 'org)
 (require 'ox)
 (require 'ox-html)
 (require 'ox-publish)
 
+;; Force color for headless export
+(setq-default frame-background-mode 'light)
+(load-theme 'tango t)
+
+;; ... the rest of your org-publish-project-alist ...
 
 ;; Add this to your publish.el for the languages you use
 (use-package zig-mode :ensure t)
