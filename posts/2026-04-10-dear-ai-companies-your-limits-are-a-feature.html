@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- 10 April 2026 -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dear AI companies: Your rate limits are my favorite feature</title>
+<meta name="author" content="doyougnu" />
+<meta name="generator" content="Org Mode" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+            body {
+                margin: 0 auto;
+                padding: 2rem 1rem;
+                background: #fafafa;
+                color: #444444;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+                font-size: 16px;
+                line-height: 1.8;
+                text-shadow: 0 1px 0 #ffffff;
+                max-width: 80ch;
+            }
+            /* Light grey background for code blocks */
+            pre.src {
+                background-color: #f5f5f5;
+                color: #333;
+                padding: 1.2em;
+                border: 1px solid #e0e0e0;
+                border-radius: 4px;
+                overflow-x: auto;
+                font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+                font-size: 0.9em;
+            }
+            code {
+                background: #f5f5f5;
+                padding: 2px 4px;
+                border-radius: 3px;
+            }
+            /* Haskell Specific Syntax Colors */
+            .org-haskell-keyword     { color: #a71d5d; font-weight: bold; } /* newtype, where, let */
+            .org-haskell-type        { color: #0086b3; }                   /* SBV, SVal, Int */
+            .org-haskell-constructor { color: #63a35c; font-weight: bold; } /* SBV (the constructor) */
+            .org-haskell-operator    { color: #333333; }                   /* ::, =, -> */
+            .org-haskell-definition  { color: #795da3; }                   /* unSBV */
+            .org-doc                 { color: #969896; font-style: italic; } /* -- | comments */
+
+
+            /* Essential Syntax Colors for the 'css' output type */
+            .org-keyword { color: #a71d5d; font-weight: bold; }
+            .org-string  { color: #183691; }
+            .org-comment { color: #969896; font-style: italic; }
+            .org-type    { color: #0086b3; }
+            .org-function-name { color: #795da3; }
+            .org-variable-name { color: #ed6a43; }
+
+            a { border-bottom: 1px solid #444444; color: #444444; text-decoration: none; }
+            a:hover { border-bottom: 0; }
+        </style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Dear AI companies: Your rate limits are my favorite feature</h1>
+<p>
+This is going to be a quick on but the argument is:
+</p>
+
+<p>
+tl;dr:
+</p>
+<ol class="org-ol">
+<li>LLMs are useful but come with a substantial risk of cognitive debt.</li>
+<li>The more code that&rsquo;s generated, the less you really grok and the more you&rsquo;ll
+need to review.</li>
+<li>This means you&rsquo;ll need to schedule read, review, refine and rewrite time (R<sup>4</sup>
+time).</li>
+<li>Contrary to the AI companies business models, the best time for R<sup>4</sup> time is
+when you no longer have access to the models, e.g., when you&rsquo;ve been rate
+limited.</li>
+</ol>
+<hr>
+<p>
+Conclusion: This is a great (non-monatizable) feature not a bug.
+</p>
+
+<p>
+A few weeks ago I had a revelatory experience. I was flying to visit some family
+and didn&rsquo;t want to pay for an internet connection. Now, in general, I love
+coding on flights because you have very little distraction and without an
+internet connection you have to rely on only yourself, local documentation and
+your wits. So I fired up emacs, and started working on a little rust side
+project that I had been writing with the help of Claude. As I wrote I felt more
+connected to the code and the semantic object than I had felt in a very very
+long time.
+</p>
+
+<p>
+It. Was. Complete. Joy. And I made substantial progress not just in code written
+<i>but in design and architecture</i>. I was more able to be deep in the system, look
+around and say &ldquo;Hmm, should <code>Foo</code> really now about <code>Bar</code>? What if it didn&rsquo;t?
+What if I have many <code>Bar</code> or a remote <code>Foo</code>?&rdquo;. Since then I now regularly use
+the free versions of the LLM chatbots until they rate limit me. When they do I
+smile and say thank you for the prompt to read, review, refine and rewrite and
+happily begin doing so.
+</p>
+
+<p>
+The key point is to recontextualize of what rate limiting is. The AI companies
+want rate limiting to be a nudge toward a paid subscription and <i>want you to
+believe that</i>. They want you to think &ldquo;That was great and I need MoAr!&rdquo;. But
+this is 2026, we have lived through the social media era and have (hopefully)
+learned that frictionless, unfettered access is not a clear monotonic benefit.
+The AI companies are wrong. Rate limiting is a built-in time box feature. Its
+exactly the same as time box apps that prevent you from hitting the instagram
+slot machine for hours a day. Only now you are prevented from hitting the LLM
+slot machine for too long, and that is a good thing.
+</p>
+
+<p>
+The benefits do not stop at controlling dosage. Once a rate limit occurs you are
+forced to return to a pre-LLM world of development. So you are forced to return
+to understanding what the hell you&rsquo;re trying to build, how you <i>have been</i>
+trying to build it, and if the current implementation is what <i>you want</i>. To put
+it another way: rate limits prompt you to start paying down the <a href="https://martinfowler.com/fragments/2026-02-13.html">cognitive debt</a>
+you&rsquo;ve accumulated by employing an LLM. They force you to amortize this debt, so
+that you pay it down for a few hours every day, accumulate a little more, and
+then pay that down the next day. This way the cognitive debt never accumulates
+to a point where you cannot explain why the implementation is architected the
+way it is, or why certain design decisions were made. This practice keeps you in
+the loop, keeps you in the architects chair, and is in my opinion superior to
+the yolo vibe-coding one can now find all over the internet. The cost is worth
+it and its not even close.
+</p>
+
+<p>
+But what about raising the limits? Sure you can buy a paid subscription to
+increase your limits. Increasing your limits are a tool you can employ to change
+the ratio of generation time and R<sup>4</sup> time. That is your choice. For me, <i>I like
+the friction</i>. I want that friction. That friction is useful and I prefer
+something like a 30/70 time ratio. Personally, there is no world where I will
+buy a subscription. I <i>have already paid</i> for these models with my labor, my
+open source contributions, my private repos, my publications, and this blog. All
+of which were illegally used to train these models.
+</p>
+
+<p>
+So don&rsquo;t run from the limits. Embrace them. The limits are a prompt to return to
+a pre-LLM development world that had, and has, real benefits for you, your team,
+and for the project you are working on.
+</p>
+</div>
+<div id="postamble" class="status">
+<hr>
+               <div class='author-info' style='text-align:center; margin-top: 2em; font-style: italic;'>
+                 Written by <a href='/me.html' class='author-link'>doyougnu</a>
+                 on <span class='timestamp'>2026-04-10</span>
+               </div>
+               <div class='botnav' style='text-align:center; margin-top: 2em;'>
+                  <a href='/index.html'>Blog</a>
+                  <a href='/publications.html'>Publications</a>
+                  <a href='https://github.com/doyougnu'>Github</a>
+                  <a href='/me.html'>About</a>
+               </div>
+</div>
+</body>
+</html>
