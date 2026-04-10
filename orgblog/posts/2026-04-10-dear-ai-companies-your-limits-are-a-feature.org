@@ -1,0 +1,71 @@
+#+title: Dear AI companies: Your rate limits are my favorite feature
+#+date: 2026-04-10
+#+filetags: :ai:
+
+This is going to be a quick on but the argument is:
+
+tl;dr:
+1. LLMs are useful but come with a substantial risk of cognitive debt.
+2. The more code that's generated, the less you really grok and the more you'll
+   need to review.
+3. This means you'll need to schedule read, review, refine and rewrite time (R^{4}
+   time).
+4. Contrary to the AI companies business models, the best time for R^{4} time is
+   when you no longer have access to the models, e.g., when you've been rate
+   limited.
+----------------
+Conclusion: This is a great (non-monatizable) feature not a bug.
+
+A few weeks ago I had a revelatory experience. I was flying to visit some family
+and didn't want to pay for an internet connection. Now, in general, I love
+coding on flights because you have very little distraction and without an
+internet connection you have to rely on only yourself, local documentation and
+your wits. So I fired up emacs, and started working on a little rust side
+project that I had been writing with the help of Claude. As I wrote I felt more
+connected to the code and the semantic object than I had felt in a very very
+long time.
+
+It. Was. Complete. Joy. And I made substantial progress not just in code written
+/but in design and architecture/. I was more able to be deep in the system, look
+around and say "Hmm, should ~Foo~ really now about ~Bar~? What if it didn't?
+What if I have many ~Bar~ or a remote ~Foo~?". Since then I now regularly use
+the free versions of the LLM chatbots until they rate limit me. When they do I
+smile and say thank you for the prompt to read, review, refine and rewrite and
+happily begin doing so.
+
+The key point is to recontextualize of what rate limiting is. The AI companies
+want rate limiting to be a nudge toward a paid subscription and /want you to
+believe that/. They want you to think "That was great and I need MoAr!". But
+this is 2026, we have lived through the social media era and have (hopefully)
+learned that frictionless, unfettered access is not a clear monotonic benefit.
+The AI companies are wrong. Rate limiting is a built-in time box feature. Its
+exactly the same as time box apps that prevent you from hitting the instagram
+slot machine for hours a day. Only now you are prevented from hitting the LLM
+slot machine for too long, and that is a good thing.
+
+The benefits do not stop at controlling dosage. Once a rate limit occurs you are
+forced to return to a pre-LLM world of development. So you are forced to return
+to understanding what the hell you're trying to build, how you /have been/
+trying to build it, and if the current implementation is what /you want/. To put
+it another way: rate limits prompt you to start paying down the [[https://martinfowler.com/fragments/2026-02-13.html][cognitive debt]]
+you've accumulated by employing an LLM. They force you to amortize this debt, so
+that you pay it down for a few hours every day, accumulate a little more, and
+then pay that down the next day. This way the cognitive debt never accumulates
+to a point where you cannot explain why the implementation is architected the
+way it is, or why certain design decisions were made. This practice keeps you in
+the loop, keeps you in the architects chair, and is in my opinion superior to
+the yolo vibe-coding one can now find all over the internet. The cost is worth
+it and its not even close.
+
+But what about raising the limits? Sure you can buy a paid subscription to
+increase your limits. Increasing your limits are a tool you can employ to change
+the ratio of generation time and R^{4} time. That is your choice. For me, /I like
+the friction/. I want that friction. That friction is useful and I prefer
+something like a 30/70 time ratio. Personally, there is no world where I will
+buy a subscription. I /have already paid/ for these models with my labor, my
+open source contributions, my private repos, my publications, and this blog. All
+of which were illegally used to train these models.
+
+So don't run from the limits. Embrace them. The limits are a prompt to return to
+a pre-LLM development world that had, and has, real benefits for you, your team,
+and for the project you are working on.

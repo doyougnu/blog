@@ -1,5 +1,11 @@
 
 
+* To add a post
+
+- write the draft
+- move to posts
+- add a link on index
+
 * To Deploy
 
 ** Build the site

@@ -6,7 +6,7 @@
 * What have you worked on?
 
 I'm a former academic, programming language researcher, compiler engineer,
-systems programmer and tinkerer. You can find my linkedin [[www.linkedin.com/in/jeffrey-young-ph-d-17b97566][here]].
+systems programmer and tinkerer. You can find my linkedin [[https://www.linkedin.com/in/jeffrey-young-ph-d-17b97566][here]].
 
 * How to contact you?
 

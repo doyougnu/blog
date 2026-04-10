@@ -4,4 +4,6 @@
 
 * 2026
 
+** [[file:posts/2026-04-10-dear-ai-companies-your-limits-are-a-feature.org][Dear AI companies: Your rate limits are my favorite feature]]
+
 ** [[file:posts/2026-03-27-the-type-theorists-need-to-take-a-look-at-zig.org][The Type Theorists need to take a look at Zig]]
