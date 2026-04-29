@@ -261,7 +261,8 @@ Very nice! What about typeclasses? Again <code>comptime</code> and <code>structs
 </p>
 
 <div class="org-src-container">
-<pre class="src src-zig">
+<pre class="src src-zig">    <span class="org-keyword">const</span> <span class="org-variable-name">std</span> = <span class="org-builtin">@import</span>(<span class="org-string">"std"</span>);
+
     <span class="org-comment-delimiter">// </span><span class="org-comment">This is: class Eq where ...
 </span>    <span class="org-keyword">fn</span> <span class="org-function-name">Eq</span>(<span class="org-keyword">comptime</span> <span class="org-variable-name">T</span>: <span class="org-type">type</span>) <span class="org-type">type</span> {
       <span class="org-comment-delimiter">// </span><span class="org-comment">Observe that we can not only program at compile time
@@ -311,42 +312,65 @@ deriving <code>Eq</code> on our <code>Point</code> type:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-zig">  <span class="org-keyword">const</span> <span class="org-variable-name">Point</span> = <span class="org-keyword">struct</span> {
+<pre class="src src-zig">
+<span class="org-keyword">const</span> <span class="org-variable-name">std</span> = <span class="org-builtin">@import</span>(<span class="org-string">"std"</span>);
+
+<span class="org-keyword">fn</span> <span class="org-function-name">EqClass</span>(<span class="org-keyword">comptime</span> <span class="org-variable-name">T</span>: <span class="org-type">type</span>) <span class="org-type">type</span> {
+    <span class="org-keyword">if</span> (!<span class="org-builtin">@hasDecl</span>(T, <span class="org-string">"eqlImpl"</span>)) <span class="org-comment-delimiter">// </span><span class="org-comment">now we verify there is an instance implementation
+</span>        <span class="org-builtin">@compileError</span>(<span class="org-builtin">@typeName</span>(T) ++ <span class="org-string">" must implement eqlImpl(T, T) bool"</span>);
+
+    <span class="org-keyword">return</span> <span class="org-keyword">struct</span> {
+        <span class="org-comment-delimiter">// </span><span class="org-comment">and these functions just wrap the implementation provided by T
+</span>        <span class="org-keyword">pub</span> <span class="org-keyword">fn</span> <span class="org-function-name">eql</span>(<span class="org-variable-name">a</span>: <span class="org-type">T</span>, <span class="org-variable-name">b</span>: <span class="org-type">T</span>) <span class="org-type">bool</span> { <span class="org-keyword">return</span> T.eqlImpl(a, b); }
+        <span class="org-keyword">pub</span> <span class="org-keyword">fn</span> <span class="org-function-name">neq</span>(<span class="org-variable-name">a</span>: <span class="org-type">T</span>, <span class="org-variable-name">b</span>: <span class="org-type">T</span>) <span class="org-type">bool</span> { <span class="org-keyword">return</span> !T.eqlImpl(a, b); }
+    };
+}
+
+<span class="org-keyword">const</span> <span class="org-variable-name">Point</span> = <span class="org-keyword">struct</span> {
     <span class="org-variable-name">x</span>: <span class="org-type">i32</span>,
     <span class="org-variable-name">y</span>: <span class="org-type">i32</span>,
 
-    <span class="org-comment-delimiter">// </span><span class="org-comment">derive Eq
-</span>    <span class="org-keyword">pub</span> <span class="org-keyword">const</span> <span class="org-variable-name">Eq</span> = EqClass(<span class="org-builtin">@This</span>()); <span class="org-comment-delimiter">// </span><span class="org-comment">renamed Eq to EqClass to avoid collision
-</span>};
+    <span class="org-comment-delimiter">// </span><span class="org-comment">the actual implementation, this is the body of (==) in the instance
+</span>    <span class="org-keyword">pub</span> <span class="org-keyword">fn</span> <span class="org-function-name">eqlImpl</span>(<span class="org-variable-name">a</span>: <span class="org-type">Point</span>, <span class="org-variable-name">b</span>: <span class="org-type">Point</span>) <span class="org-type">bool</span> {
+        <span class="org-keyword">return</span> a.x == b.x <span class="org-keyword">and</span> a.y == b.y;
+    }
 
-  <span class="org-keyword">pub</span> <span class="org-keyword">fn</span> <span class="org-function-name">main</span>() <span class="org-type">void</span> {
+    <span class="org-comment-delimiter">// </span><span class="org-comment">derive Eq: EqClass reads eqlImpl above so we don't create a cycle
+</span>    <span class="org-keyword">pub</span> <span class="org-keyword">const</span> <span class="org-variable-name">Eq</span> = EqClass(<span class="org-builtin">@This</span>());
+};
+
+<span class="org-keyword">pub</span> <span class="org-keyword">fn</span> <span class="org-function-name">main</span>() <span class="org-type">void</span> {
     <span class="org-keyword">const</span> <span class="org-variable-name">a</span> = Point{ .x = 1, .y = 2 };
     <span class="org-keyword">const</span> <span class="org-variable-name">b</span> = Point{ .x = 1, .y = 2 };
     <span class="org-keyword">const</span> <span class="org-variable-name">c</span> = Point{ .x = 3, .y = 4 };
 
-    std.debug.print(<span class="org-string">"a == c: {}\n"</span>, .{a.Eq.eql(c)});  <span class="org-comment-delimiter">// </span><span class="org-comment">false
-</span>    std.debug.print(<span class="org-string">"a == b: {}\n"</span>, .{a.Eq.eql(b)});  <span class="org-comment-delimiter">// </span><span class="org-comment">true
+    std.debug.print(<span class="org-string">"a == c: {}\n"</span>, .{Point.Eq.eql(a, c)});  <span class="org-comment-delimiter">// </span><span class="org-comment">false
+</span>    std.debug.print(<span class="org-string">"a == b: {}\n"</span>, .{Point.Eq.eql(a, b)});  <span class="org-comment-delimiter">// </span><span class="org-comment">true
+</span>    std.debug.print(<span class="org-string">"a != c: {}\n"</span>, .{Point.Eq.neq(a, c)});  <span class="org-comment-delimiter">// </span><span class="org-comment">true
 </span>}
 </pre>
 </div>
 
 <p>
-I could go on. In fact, in Zig you can use structs to create closures, to curry,
-and therefore write higher-ordered functions all without a garbage collector.
+Not bad. Its less ergonomic than Haskell for sure but I think that&rsquo;s a good
+thing. In fact, I look at this, squint really hard and see something like an ML
+module system hiding behind the scenes. I could go on. In fact, in Zig you can
+use structs to create closures, to curry, and therefore write higher-ordered
+functions all without a garbage collector. But I&rsquo;ll save that for another post.
 </p>
 
 <p>
-I&rsquo;m bullish on Zig. Zig has what I need and want to express my domain and ideas
-succinctly (this was 1. in my original criteria). Zig&rsquo;s comptime has very good
-support for programming the type system and creating correct-by-construction
-programs. I still have to experiment more with it, but I think it is atleast in
-the ball park of Haskell and easier to program at that (this was 2.). Finally,
-Zig&rsquo;s &ldquo;no spooky action at a distance&rdquo; means I have not once been surprised
-about the semantics in my experimentation. I&rsquo;m sure there will be edge cases but
-I can confidentally say that Zig has a greater mean free path length than
-languages that its often positioned against: Rust, C++ (for sure). I love
-Haskell and its been my go to language for the last 10-13 years but god damn I
-see a lot of Zig in my future.
+Needless to say I&rsquo;m bullish on Zig. I think Zig is doing so much right. Zig has
+what I need and want to express my domain and ideas succinctly (this was 1. in
+my original criteria). Zig&rsquo;s comptime has very good support for programming the
+type system and creating correct-by-construction programs. I still have to
+experiment more with it, but I think it is atleast in the ball park of Haskell
+and easier to program at that (this was 2.). Finally, Zig&rsquo;s &ldquo;no spooky action at
+a distance&rdquo; means I have not once been surprised about the semantics in my
+experimentation. I&rsquo;m sure there will be edge cases but I can confidentally say
+that Zig has a greater mean free path length than languages that its often
+positioned against: Rust, C++ (for sure). I love Haskell and its been my go to
+language for the last 10-13 years but god damn I see a lot of Zig in my future.
 </p>
 </div>
 <div id="postamble" class="status">
