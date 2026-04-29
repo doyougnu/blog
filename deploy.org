@@ -4,7 +4,8 @@
 
 - write the draft
 - move to posts
-- add a link on index
+- add a link on index, make sure ~orgblog~ is not the first directory, the path
+  should be ~posts/...~
 
 * To Deploy
 
