@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 29 April 2026 -->
+<!-- 17 May 2026 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Dear AI companies: Your rate limits are my favorite feature</title>
@@ -20,7 +20,6 @@
                 text-shadow: 0 1px 0 #ffffff;
                 max-width: 80ch;
             }
-            /* Light grey background for code blocks */
             pre.src {
                 background-color: #f5f5f5;
                 color: #333;
@@ -37,22 +36,32 @@
                 border-radius: 3px;
             }
             /* Haskell Specific Syntax Colors */
-            .org-haskell-keyword     { color: #a71d5d; font-weight: bold; } /* newtype, where, let */
-            .org-haskell-type        { color: #0086b3; }                   /* SBV, SVal, Int */
-            .org-haskell-constructor { color: #63a35c; font-weight: bold; } /* SBV (the constructor) */
-            .org-haskell-operator    { color: #333333; }                   /* ::, =, -> */
-            .org-haskell-definition  { color: #795da3; }                   /* unSBV */
-            .org-doc                 { color: #969896; font-style: italic; } /* -- | comments */
-
-
-            /* Essential Syntax Colors for the 'css' output type */
-            .org-keyword { color: #a71d5d; font-weight: bold; }
-            .org-string  { color: #183691; }
-            .org-comment { color: #969896; font-style: italic; }
-            .org-type    { color: #0086b3; }
+            .org-haskell-keyword     { color: #a71d5d; font-weight: bold; }
+            .org-haskell-type        { color: #0086b3; }
+            .org-haskell-constructor { color: #63a35c; font-weight: bold; }
+            .org-haskell-operator    { color: #333333; }
+            .org-haskell-definition  { color: #795da3; }
+            .org-doc                 { color: #969896; font-style: italic; }
+            /* General Syntax Colors */
+            .org-keyword       { color: #a71d5d; font-weight: bold; }
+            .org-string        { color: #183691; }
+            .org-comment       { color: #969896; font-style: italic; }
+            .org-type          { color: #0086b3; }
             .org-function-name { color: #795da3; }
             .org-variable-name { color: #ed6a43; }
-
+            /* Tag pill styles - used on index and post pages */
+            .post-tag {
+                display: inline-block;
+                background: #e8e8e8;
+                color: #555;
+                padding: 2px 8px;
+                border-radius: 3px;
+                font-size: 0.8em;
+                margin-right: 4px;
+                text-decoration: none;
+                border-bottom: none;
+            }
+            .post-tag:hover { background: #d0d0d0; border-bottom: none; }
             a { border-bottom: 1px solid #444444; color: #444444; text-decoration: none; }
             a:hover { border-bottom: 0; }
         </style>

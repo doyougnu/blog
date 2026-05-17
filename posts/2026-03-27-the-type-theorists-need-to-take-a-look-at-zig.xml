@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+     xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+     xmlns:georss="http://www.georss.org/georss"
+     xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+     xmlns:media="http://search.yahoo.com/mrss/"><channel>
+  <title>The Type Theorists need to take a look at Zig</title>
+  <atom:link href="https://pure-systems.org/2026-03-27-the-type-theorists-need-to-take-a-look-at-zig.xml" rel="self" type="application/rss+xml" />
+  <link>https://pure-systems.org/</link>
+  <description><![CDATA[]]></description>
+  <language>en</language>
+  <pubDate>Sun, 17 May 2026 14:05:00 +0000</pubDate>
+  <lastBuildDate>Sun, 17 May 2026 14:05:00 +0000</lastBuildDate>
+  <generator>Emacs 30.2 Org-mode 9.8</generator>
+  <webMaster>jmy6342@gmail.com (Jeffrey Young)</webMaster>
+  <image>
+    <url>https://orgmode.org/img/org-mode-unicorn-logo.png</url>
+    <title>The Type Theorists need to take a look at Zig</title>
+    <link>https://pure-systems.org/</link>
+  </image>
+
+  <p>
+    I've recently been porting the <a href="https://hackage-content.haskell.org/package/sbv-13.6">sbv</a> library (of which I was a major contributor
+    to) to Zig. Why? Several reasons: I think the cost of formal methods has
+    drastically reduced because of LLMs. I think Zig is a really good and promising
+    language that I want to succeed and the best way to do that is to write
+    interesting software in it. And because I want to write a symbolic execution
+    engine that targets Zig.
+  </p>
+
+  <p>
+    If you know me, you'll know I'm pretty deep into the Haskell-verse and have been
+    for many years. One of the many things I love about Haskell is that after enough
+    time in the language you get really good at programming the type system to <a href="https://functional-architecture.org/">make
+    illegal states unrepresentable</a>. Note that I said <i>program</i> the type system. You
+    typically program the type system to match your domain which then allows the
+    compiler to catch all kinds of gnarly bugs at compile time. This is one of the
+    key payoffs for an expressive strong and static type system.
+  </p>
+
+  <p>
+    But there has always been a little wrinkle in this story. The type system is
+    a logic programming paradigm that is based on unification and backtracking. This
+    means that you are (rightfully) limited in what you can program at the type
+    level. Of course there are <a href="https://www.stevenleiva.com/posts/gadts">ways</a> to push more and more into type system and even
+    <a href="https://lexi-lambda.github.io/blog/2021/03/25/an-introduction-to-typeclass-metaprogramming/">generate</a> term-level data in the type system that you can then use at runtime.
+    But these are always rather large increases in the complexity of the code base.
+  </p>
+
+  <p>
+    Enter <a href="https://ziglang.org/">Zig</a> and its concept of <code>comptime</code>. Now Zig firmly comes from the
+    <a href="https://tomasp.net/academic/drafts/cultures/cultures.pdf">engineering</a> culture of programming languages and is mainly concerned with
+    low-level details that most Haskell programmers and type theorists never think
+    twice about. But god dammit Zig is punches way above its weight precisely
+    because it shifts my position as a programmer from a <i>user</i> of the type system
+    to an <i>operator</i>. It gives me the raw tools to program the type system as I see
+    fit, for my system and for my domain. And god dammit its radicalizing me.
+  </p>
+
+  <p>
+    Here is an example. In porting sbv, I want to have a type that represents
+    <code>Symbolic</code> values. These are logic variables that are known to the underlying
+    SAT/SMT solver but that carry a type. So the type must denote both of those
+    aspects: that the term I'm typing belongs to the SAT/SMT solver and the type of
+    the term <i>in the solver</i>. Sbv does this in the typical Haskell way using
+    phantom types to tag the symbolic value:
+  </p>
+
+  <div class="org-src-container">
+    <pre class="src src-haskell"><code><span class="org-doc">-- | The "Symbolic" value. The parameter @a@ is phantom, but is
+    -- extremely important in keeping the user interface strongly typed.
+    </span><span class="org-haskell-keyword">newtype</span> <span class="org-haskell-type">SBV</span> a <span class="org-haskell-operator">=</span> <span class="org-haskell-constructor">SBV</span> { unSBV <span class="org-haskell-operator">::</span> <span class="org-haskell-type">SVal</span> }
+
+    <span class="org-doc">-- | A symbolic boolean/bit
+    </span><span class="org-haskell-keyword">type</span> <span class="org-haskell-type">SBool</span>   <span class="org-haskell-operator">=</span> <span class="org-haskell-type">SBV</span> <span class="org-haskell-type">Bool</span>
+    </code></pre>
+  </div>
+
+  <p>
+    Now that we have in <code>SBool</code> we can start to write our type safe api. For
+    example, the logical <code>and</code> function should take two <code>SBool</code> and return
+    an <code>SBool</code>, and the logical <code>not</code> should take an <code>SBool</code> and return as <code>SBool</code>:
+  </p>
+
+  <div class="org-src-container">
+    <pre class="src src-haskell"><code><span class="org-doc">-- | Symbolic boolean negation
+    </span><span class="org-haskell-definition">sNot</span> <span class="org-haskell-operator">::</span> <span class="org-haskell-type">SBool</span> <span class="org-haskell-operator">-&gt;</span> <span class="org-haskell-type">SBool</span>
+    <span class="org-haskell-definition">sNot</span> <span class="org-haskell-operator">=</span> <span class="org-haskell-operator">...</span>
+
+    <span class="org-doc">-- | Symbolic conjunction
+    </span>(<span class="org-haskell-definition">.&amp;&amp;</span>) <span class="org-haskell-operator">::</span> <span class="org-haskell-type">SBool</span> <span class="org-haskell-operator">-&gt;</span> <span class="org-haskell-type">SBool</span> <span class="org-haskell-operator">-&gt;</span> <span class="org-haskell-type">SBool</span>
+    (<span class="org-haskell-definition">.&amp;&amp;</span>) <span class="org-haskell-operator">...</span>
+    </code></pre>
+  </div>
+
+  <p>
+    and this is enforced in the type system and ill-typed arguments would be caught
+    at compile time.
+  </p>
+
+  <p>
+    To write this in Zig we need to be able to write a <code>newtype</code>, to create a
+    nominal type, write a type synonym and then implement phantom types. These are
+    all possible, and dare I say easy:
+  </p>
+
+  <div class="org-src-container">
+    <pre class="src src-zig"><code><span class="org-doc">/// A type constructor for symbolic values. A is a phantom.
+    </span><span class="org-keyword">fn</span> <span class="org-function-name">Symbolic</span>(<span class="org-keyword">comptime</span> <span class="org-variable-name">A</span>: <span class="org-type">type</span>) <span class="org-type">type</span> {
+    <span class="org-keyword">return</span> <span class="org-keyword">struct</span> {
+    <span class="org-variable-name">ast</span>: <span class="org-type">z3_pkg.Ast</span>
+    }
+    }
+
+    <span class="org-doc">/// A symbolic bool
+    </span><span class="org-keyword">pub</span> <span class="org-keyword">const</span> <span class="org-variable-name">SBool</span> = Symbolic(<span class="org-type">bool</span>);
+
+    <span class="org-doc">///
+    </span><span class="org-keyword">pub</span> <span class="org-keyword">fn</span> <span class="org-function-name">sAnd</span>(<span class="org-variable-name">self</span>: <span class="org-type">SBool</span>, <span class="org-variable-name">other</span>: <span class="org-type">SBool</span>) SBool {
+    <span class="org-keyword">return</span> .{ .ast = self.ast.@<span class="org-string">"and"</span>(other.ast) };
+    }
+    </code></pre>
+  </div>
+
+  <p>
+    <code>Symbolic</code> is a type level function that at compile time takes the type <code>A</code> and
+    returns a type. <code>A</code> is a phantom because its never used in the return struct; it
+    solely holds information at the type level. <code>z3_pkg.Ast</code> is untyped and
+    corresponds to <code>sbv</code>'s <code>SVal</code> type. So our <code>SBools</code> are a new type constructed
+    by the application of <code>Symbolic</code> to Zig's <code>bool</code> type. Finally <code>sAnd</code> is our
+    binary symbolic conjunction, which takes two <code>SBool</code> and returns an <code>SBool</code>. The
+    actual body of <code>sAnd</code> is just a call into the untyped <code>z3</code> C FFI.
+  </p>
+
+  <p>
+    Wonderful! That was easy! Perhaps a bit too easy. To really test Zig let's try
+    to do the same tricks but for symbolic numerals. Numerals are more tricky
+    because the symbolic operations must work on a range of types. For example here
+    is the symbolic less-then in <code>sbv</code> uses type-classes:
+  </p>
+
+  <div class="org-src-container">
+    <pre class="src src-haskell"><code><span class="org-haskell-keyword">class</span> (<span class="org-haskell-type">Mergeable</span> a, <span class="org-haskell-type">EqSymbolic</span> a) <span class="org-haskell-operator">=&gt;</span> <span class="org-haskell-type">OrdSymbolic</span> a <span class="org-haskell-keyword">where</span>
+    <span class="org-haskell-operator">...</span>
+    <span class="org-doc">-- | Symbolic less than or equal to.
+    </span>(<span class="org-haskell-definition">.&lt;</span>) <span class="org-haskell-operator">::</span> a <span class="org-haskell-operator">-&gt;</span> a <span class="org-haskell-operator">-&gt;</span> <span class="org-haskell-type">SBool</span>
+    <span class="org-haskell-operator">...</span>
+    </code></pre>
+  </div>
+
+  <p>
+    But Zig does not have any type-classes so what are we to do. Well let's take a
+    step back and think about type-classes operationally. A type-class in Haskell
+    serves several purposes: it provides instances which declare a type as a member
+    of a set of types, it attaches methods to a type, and it programs the type
+    system. For example, the type-class <code>OrdSymbolic</code> associates the type <code>a</code> with
+    the set of types that have instances for <code>OrdSymbolic</code>. <code>(.&lt;=)</code> is then attached
+    to each of these types through the type-class instances and type-class
+    constraints. And finally <code>OrdSymbolic</code> is a type-level program that says to
+    conclude <code>OrdSymbolic a</code> you need to provide me a <code>Mergeable a</code> and a
+    <code>EqSymbolic a</code>. Well in Zig we can roll our own with some type level functions
+    and constants:
+  </p>
+
+  <div class="org-src-container">
+    <pre class="src src-zig"><code><span class="org-comment-delimiter">// </span><span class="org-comment">sLt is symbolic less-then (.&lt;) in sbv
+    </span><span class="org-keyword">pub</span> <span class="org-keyword">fn</span> <span class="org-function-name">sLt</span>(<span class="org-variable-name">self</span>: <span class="org-type">SNum</span>(T), <span class="org-variable-name">other</span>: <span class="org-type">SNum</span>(T)) SBool {
+    <span class="org-keyword">return</span> .{ .ast = self.ast.lt(other.ast) };
+    }
+
+    <span class="org-comment-delimiter">// </span><span class="org-comment">SNum is our type-class. It checks that T is a Num-like type
+    </span><span class="org-keyword">pub</span> <span class="org-keyword">fn</span> <span class="org-function-name">SNum</span>(<span class="org-keyword">comptime</span> <span class="org-variable-name">T</span>: <span class="org-type">type</span>) <span class="org-type">type</span> {
+    <span class="org-keyword">comptime</span> <span class="org-keyword">if</span> (!isNum(T)) <span class="org-builtin">@compileError</span>(std.fmt.comptimePrint(<span class="org-string">"SNum only supports numeric types, got: {}"</span>, .{T}));
+    <span class="org-keyword">return</span> Symbolic(T);
+    }
+
+    <span class="org-comment-delimiter">// </span><span class="org-comment">isNum is a helper function. This decides if T is a Num-like type.
+    </span><span class="org-keyword">fn</span> <span class="org-function-name">isNum</span>(<span class="org-keyword">comptime</span> <span class="org-variable-name">T</span>: <span class="org-type">type</span>) <span class="org-type">bool</span> {
+    <span class="org-keyword">inline</span> <span class="org-keyword">for</span> (num_types) |N| {
+    <span class="org-keyword">if</span> (T == N) <span class="org-keyword">return</span> <span class="org-constant">true</span>;
+    }
+    <span class="org-keyword">return</span> <span class="org-constant">false</span>;
+    }
+
+    <span class="org-comment-delimiter">// </span><span class="org-comment">A type-level constant array of phantom tags
+    </span><span class="org-keyword">const</span> <span class="org-variable-name">num_types</span> = .{ Integer, Int64, Word8, Real };
+    </code></pre>
+  </div>
+
+  <p>
+    Let's go step by step. <code>sLT</code> is a term-level function that takes two <code>SNum(T)</code>
+    and concludes a <code>SBool</code>. <code>SNum</code> is our type-class represented as a type-level
+    function that takes a type <code>T</code> and returns a <code>Symbolic(T)</code>. <code>SNum</code> works by
+    checking via a <code>comptime if</code> that <code>T</code> has an instance. We implement instances
+    with the helper function <code>isNum</code> which checks that <code>T</code> is a member of the
+    <code>num_types</code> static array. If it isn't <i>then we directly program</i> the error
+    message for the user. This is what I meant by treating me as an operator rather
+    than a user. I have direct control over my own error messages at compile time
+    for a type error in Zig. Just absolutely wonderful.
+  </p>
+
+  <p>
+    So an instance in Haskell such as:
+  </p>
+
+  <div class="org-src-container">
+    <pre class="src src-haskell"><code><span class="org-haskell-keyword">instance</span> <span class="org-haskell-type">SNum</span> <span class="org-haskell-type">Word16</span> <span class="org-haskell-keyword">where</span>
+    <span class="org-haskell-operator">...</span>
+    </code></pre>
+  </div>
+
+  <p>
+    corresponds to
+  </p>
+
+  <div class="org-src-container">
+    <pre class="src src-zig"><code><span class="org-keyword">const</span> <span class="org-variable-name">num_types</span> = .{..., Word16}
+    </code></pre>
+  </div>
+
+  <p>
+    which places <code>Word16</code> into the set of types that <code>SNum</code> will accept. The check
+    of <code>isNum</code> in <code>SNum</code> is only a membership check. But nothing stops us from
+    adding more type-class constraints. We might easily add <code>isOrd</code> and
+    <code>isMergeable</code> just like <code>sbv</code> has done. Then these checks are preconditions to
+    creating a <code>SNum</code> type. Just like we would have in Haskell. So in just a few
+    lines we have a type-level system that allows us to program instances and
+    program the type level. Albeit with an imperative type-level language rather
+    than a logical one. Now I have not demonstrated associating methods to types,
+    which I declared was one of the purposes of type-classes. Well Zig's structs
+    already provide this. In fact in my quick and dirty prototype that is exactly
+    how the <code>Symbolic</code> struct is written:
+  </p>
+
+  <div class="org-src-container">
+    <pre class="src src-zig"><code><span class="org-keyword">fn</span> <span class="org-function-name">Symbolic</span>(<span class="org-keyword">comptime</span> <span class="org-variable-name">T</span>: <span class="org-type">type</span>) <span class="org-type">type</span> {
+    <span class="org-keyword">return</span> <span class="org-keyword">struct</span> {
+    <span class="org-variable-name">ast</span>: <span class="org-type">z3_pkg.Ast</span>,
+
+    <span class="org-comment-delimiter">// </span><span class="org-comment">=========================================================
+    </span>      <span class="org-comment-delimiter">// </span><span class="org-comment">Symbolic Bools
+    </span>      <span class="org-comment-delimiter">// </span><span class="org-comment">=========================================================
+    </span>      ...
+    <span class="org-keyword">pub</span> <span class="org-keyword">fn</span> <span class="org-function-name">sAnd</span>(<span class="org-variable-name">self</span>: <span class="org-type">SBool</span>, <span class="org-variable-name">other</span>: <span class="org-type">SBool</span>) SBool {
+    <span class="org-keyword">return</span> .{ .ast = self.ast.@<span class="org-string">"and"</span>(other.ast) };
+    }
+
+    <span class="org-comment-delimiter">// </span><span class="org-comment">=========================================================
+    </span>      <span class="org-comment-delimiter">// </span><span class="org-comment">Symbolic Numerals
+    </span>      <span class="org-comment-delimiter">// </span><span class="org-comment">=========================================================
+    </span>      ...
+    <span class="org-keyword">pub</span> <span class="org-keyword">fn</span> <span class="org-function-name">sLt</span>(<span class="org-variable-name">self</span>: <span class="org-type">SNum</span>(T), <span class="org-variable-name">other</span>: <span class="org-type">SNum</span>(T)) SBool {
+    <span class="org-keyword">return</span> .{ .ast = self.ast.lt(other.ast) };
+    }
+    ...
+    };
+
+    </code></pre>
+  </div>
+
+  <p>
+    And this allows us to program like this:
+  </p>
+
+  <div class="org-src-container">
+    <pre class="src src-zig"><code>... <span class="org-comment-delimiter">// </span><span class="org-comment">skipping initialization for now
+    </span><span class="org-keyword">const</span> <span class="org-variable-name">x</span>: <span class="org-type">SInt64</span> = sInt64(<span class="org-string">"x"</span>);
+    <span class="org-keyword">const</span> <span class="org-variable-name">y</span>: <span class="org-type">SInt64</span> = sInt64(<span class="org-string">"y"</span>);
+    <span class="org-keyword">const</span> <span class="org-variable-name">ten</span> = int64(100);
+    solver.constrain(x.sAdd(y).sEq(ten)); <span class="org-comment-delimiter">// </span><span class="org-comment">sAdd, sEq, sLt, sAnd are methods on Symbolic(T)
+  </span>
+  <span class="org-keyword">const</span> <span class="org-variable-name">result</span> = solver.checkSat();
+  std.debug.print(<span class="org-string">"Check result: {s}\n"</span>, .{<span class="org-builtin">@tagName</span>(result)});
+
+  <span class="org-keyword">if</span> (result == .sat) {
+  <span class="org-keyword">if</span> (solver.getModel()) |model| {
+  <span class="org-keyword">defer</span> model.deinit();
+  std.debug.print(<span class="org-string">"Model:\n{s}\n"</span>, .{model.toString() <span class="org-keyword">orelse</span> <span class="org-string">"(null)"</span>});
+  }
+  }
+    </code></pre>
+  </div>
+
+  <p>
+    which yields:
+  </p>
+
+  <div class="org-src-container">
+    <pre class="src src-nil"><code>zig build run-simple
+    Check result: sat
+    Model:
+    y -&gt; 0
+    x -&gt; 100
+    </code></pre>
+  </div>
+
+  <p>
+    and let's say we have a type error:
+  </p>
+
+  <div class="org-src-container">
+    <pre class="src src-zig"><code>... <span class="org-comment-delimiter">// </span><span class="org-comment">skipping initialization for now
+    </span><span class="org-keyword">const</span> <span class="org-variable-name">x</span>: <span class="org-type">SInt64</span> = sInt64(<span class="org-string">"x"</span>);
+    <span class="org-keyword">const</span> <span class="org-variable-name">y</span> = sBool(<span class="org-string">"y"</span>); <span class="org-comment-delimiter">// </span><span class="org-comment">&lt;---- now a bool not an Int64!, the type signatures are optional
+    </span><span class="org-keyword">const</span> <span class="org-variable-name">ten</span> = int64(100);
+    solver.constrain(x.sAdd(y).sEq(ten)); <span class="org-comment-delimiter">// </span><span class="org-comment">&lt;--- y should be a type-error
+    </span>...
+    </code></pre>
+  </div>
+
+  <p>
+    which yields:
+  </p>
+
+  <div class="org-src-container">
+    <pre class="src src-nil"><code>$ zig build run-simple
+    run-simple
+    +- run exe simple
+    +- compile exe simple Debug native 1 errors
+    examples/puzzles/simple.zig:51:29: error: expected type 'types.Symbolic(types.Int64)', found 'types.Symbolic(bool)'
+    solver.constrain(x.sAdd(y).sEq(ten));
+    ^
+    </code></pre>
+  </div>
+
+  <p>
+    Pretty nice! Hopefully you can see why Zig is so exciting. In my opinion
+    <code>comptime</code> could be radically simpler system to reap a lot the value of advanced
+    type systems such as Haskell's.
+  </p>
+</channel>
+</rss>

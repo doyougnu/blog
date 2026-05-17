@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 29 April 2026 -->
+<!-- 17 May 2026 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Functional Programmers need to take a look at Zig.</title>
@@ -20,7 +20,6 @@
                 text-shadow: 0 1px 0 #ffffff;
                 max-width: 80ch;
             }
-            /* Light grey background for code blocks */
             pre.src {
                 background-color: #f5f5f5;
                 color: #333;
@@ -37,22 +36,32 @@
                 border-radius: 3px;
             }
             /* Haskell Specific Syntax Colors */
-            .org-haskell-keyword     { color: #a71d5d; font-weight: bold; } /* newtype, where, let */
-            .org-haskell-type        { color: #0086b3; }                   /* SBV, SVal, Int */
-            .org-haskell-constructor { color: #63a35c; font-weight: bold; } /* SBV (the constructor) */
-            .org-haskell-operator    { color: #333333; }                   /* ::, =, -> */
-            .org-haskell-definition  { color: #795da3; }                   /* unSBV */
-            .org-doc                 { color: #969896; font-style: italic; } /* -- | comments */
-
-
-            /* Essential Syntax Colors for the 'css' output type */
-            .org-keyword { color: #a71d5d; font-weight: bold; }
-            .org-string  { color: #183691; }
-            .org-comment { color: #969896; font-style: italic; }
-            .org-type    { color: #0086b3; }
+            .org-haskell-keyword     { color: #a71d5d; font-weight: bold; }
+            .org-haskell-type        { color: #0086b3; }
+            .org-haskell-constructor { color: #63a35c; font-weight: bold; }
+            .org-haskell-operator    { color: #333333; }
+            .org-haskell-definition  { color: #795da3; }
+            .org-doc                 { color: #969896; font-style: italic; }
+            /* General Syntax Colors */
+            .org-keyword       { color: #a71d5d; font-weight: bold; }
+            .org-string        { color: #183691; }
+            .org-comment       { color: #969896; font-style: italic; }
+            .org-type          { color: #0086b3; }
             .org-function-name { color: #795da3; }
             .org-variable-name { color: #ed6a43; }
-
+            /* Tag pill styles - used on index and post pages */
+            .post-tag {
+                display: inline-block;
+                background: #e8e8e8;
+                color: #555;
+                padding: 2px 8px;
+                border-radius: 3px;
+                font-size: 0.8em;
+                margin-right: 4px;
+                text-decoration: none;
+                border-bottom: none;
+            }
+            .post-tag:hover { background: #d0d0d0; border-bottom: none; }
             a { border-bottom: 1px solid #444444; color: #444444; text-decoration: none; }
             a:hover { border-bottom: 0; }
         </style>
@@ -183,7 +192,7 @@ the example from the release notes:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-zig"><span class="org-keyword">const</span> <span class="org-variable-name">std</span> = <span class="org-builtin">@import</span>(<span class="org-string">"std"</span>);
+<pre class="src src-zig"><code><span class="org-keyword">const</span> <span class="org-variable-name">std</span> = <span class="org-builtin">@import</span>(<span class="org-string">"std"</span>);
 <span class="org-keyword">const</span> <span class="org-variable-name">Io</span> = std.Io;
 
 <span class="org-keyword">pub</span> <span class="org-keyword">fn</span> <span class="org-function-name">main</span>(<span class="org-variable-name">init</span>: <span class="org-type">std.process.Init</span>) !<span class="org-type">void</span> {
@@ -198,7 +207,7 @@ the example from the release notes:
     <span class="org-keyword">defer</span> http_client.deinit();
 ...
 }
-</pre>
+</code></pre>
 </div>
 
 <p>
@@ -219,10 +228,10 @@ Haskell-like <code>newtype</code>. In Zig is just a singleton struct:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-zig"><span class="org-keyword">struct</span> PlayerHealth {
+<pre class="src src-zig"><code><span class="org-keyword">struct</span> PlayerHealth {
   <span class="org-variable-name">health</span>: <span class="org-type">u32</span>
 }
-</pre>
+</code></pre>
 </div>
 
 <p>
@@ -230,7 +239,7 @@ Nice! Okay what about a sum type. Easy that&rsquo;s just a union:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-zig">  <span class="org-keyword">const</span> <span class="org-variable-name">std</span> = <span class="org-builtin">@import</span>(<span class="org-string">"std"</span>);
+<pre class="src src-zig"><code>  <span class="org-keyword">const</span> <span class="org-variable-name">std</span> = <span class="org-builtin">@import</span>(<span class="org-string">"std"</span>);
 
   <span class="org-comment-delimiter">// </span><span class="org-comment">the venerable Maybe, even though Zig has builtin syntax for this
 </span>  <span class="org-keyword">fn</span> <span class="org-function-name">Maybe</span>(<span class="org-keyword">comptime</span> <span class="org-variable-name">T</span>: <span class="org-type">type</span>) <span class="org-type">type</span> {
@@ -253,7 +262,7 @@ Nice! Okay what about a sum type. Easy that&rsquo;s just a union:
         }
     };
 }
-</pre>
+</code></pre>
 </div>
 
 <p>
@@ -261,7 +270,7 @@ Very nice! What about typeclasses? Again <code>comptime</code> and <code>structs
 </p>
 
 <div class="org-src-container">
-<pre class="src src-zig">    <span class="org-keyword">const</span> <span class="org-variable-name">std</span> = <span class="org-builtin">@import</span>(<span class="org-string">"std"</span>);
+<pre class="src src-zig"><code>    <span class="org-keyword">const</span> <span class="org-variable-name">std</span> = <span class="org-builtin">@import</span>(<span class="org-string">"std"</span>);
 
     <span class="org-comment-delimiter">// </span><span class="org-comment">This is: class Eq where ...
 </span>    <span class="org-keyword">fn</span> <span class="org-function-name">Eq</span>(<span class="org-keyword">comptime</span> <span class="org-variable-name">T</span>: <span class="org-type">type</span>) <span class="org-type">type</span> {
@@ -298,7 +307,7 @@ Very nice! What about typeclasses? Again <code>comptime</code> and <code>structs
     std.debug.print(<span class="org-string">"a == c: {}\n"</span>, .{EqPoint.eql(a, c)});  <span class="org-comment-delimiter">// </span><span class="org-comment">false
 </span>    std.debug.print(<span class="org-string">"a == b: {}\n"</span>, .{EqPoint.eql(a, b)});  <span class="org-comment-delimiter">// </span><span class="org-comment">true
 </span>}
-</pre>
+</code></pre>
 </div>
 
 <p>
@@ -312,7 +321,7 @@ deriving <code>Eq</code> on our <code>Point</code> type:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-zig">
+<pre class="src src-zig"><code>
 <span class="org-keyword">const</span> <span class="org-variable-name">std</span> = <span class="org-builtin">@import</span>(<span class="org-string">"std"</span>);
 
 <span class="org-keyword">fn</span> <span class="org-function-name">EqClass</span>(<span class="org-keyword">comptime</span> <span class="org-variable-name">T</span>: <span class="org-type">type</span>) <span class="org-type">type</span> {
@@ -348,7 +357,7 @@ deriving <code>Eq</code> on our <code>Point</code> type:
 </span>    std.debug.print(<span class="org-string">"a == b: {}\n"</span>, .{Point.Eq.eql(a, b)});  <span class="org-comment-delimiter">// </span><span class="org-comment">true
 </span>    std.debug.print(<span class="org-string">"a != c: {}\n"</span>, .{Point.Eq.neq(a, c)});  <span class="org-comment-delimiter">// </span><span class="org-comment">true
 </span>}
-</pre>
+</code></pre>
 </div>
 
 <p>

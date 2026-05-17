@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 29 April 2026 -->
+<!-- 17 May 2026 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -20,7 +20,6 @@
                 text-shadow: 0 1px 0 #ffffff;
                 max-width: 80ch;
             }
-            /* Light grey background for code blocks */
             pre.src {
                 background-color: #f5f5f5;
                 color: #333;
@@ -37,37 +36,47 @@
                 border-radius: 3px;
             }
             /* Haskell Specific Syntax Colors */
-            .org-haskell-keyword     { color: #a71d5d; font-weight: bold; } /* newtype, where, let */
-            .org-haskell-type        { color: #0086b3; }                   /* SBV, SVal, Int */
-            .org-haskell-constructor { color: #63a35c; font-weight: bold; } /* SBV (the constructor) */
-            .org-haskell-operator    { color: #333333; }                   /* ::, =, -> */
-            .org-haskell-definition  { color: #795da3; }                   /* unSBV */
-            .org-doc                 { color: #969896; font-style: italic; } /* -- | comments */
-
-
-            /* Essential Syntax Colors for the 'css' output type */
-            .org-keyword { color: #a71d5d; font-weight: bold; }
-            .org-string  { color: #183691; }
-            .org-comment { color: #969896; font-style: italic; }
-            .org-type    { color: #0086b3; }
+            .org-haskell-keyword     { color: #a71d5d; font-weight: bold; }
+            .org-haskell-type        { color: #0086b3; }
+            .org-haskell-constructor { color: #63a35c; font-weight: bold; }
+            .org-haskell-operator    { color: #333333; }
+            .org-haskell-definition  { color: #795da3; }
+            .org-doc                 { color: #969896; font-style: italic; }
+            /* General Syntax Colors */
+            .org-keyword       { color: #a71d5d; font-weight: bold; }
+            .org-string        { color: #183691; }
+            .org-comment       { color: #969896; font-style: italic; }
+            .org-type          { color: #0086b3; }
             .org-function-name { color: #795da3; }
             .org-variable-name { color: #ed6a43; }
-
+            /* Tag pill styles - used on index and post pages */
+            .post-tag {
+                display: inline-block;
+                background: #e8e8e8;
+                color: #555;
+                padding: 2px 8px;
+                border-radius: 3px;
+                font-size: 0.8em;
+                margin-right: 4px;
+                text-decoration: none;
+                border-bottom: none;
+            }
+            .post-tag:hover { background: #d0d0d0; border-bottom: none; }
             a { border-bottom: 1px solid #444444; color: #444444; text-decoration: none; }
             a:hover { border-bottom: 0; }
         </style>
 </head>
 <body>
 <div id="content" class="content">
-<div id="outline-container-org637b507" class="outline-2">
-<h2 id="org637b507">Peer-Reviewed Conference and Workshop Papers</h2>
-<div class="outline-text-2" id="text-org637b507">
+<div id="outline-container-org961d25d" class="outline-2">
+<h2 id="org961d25d">Peer-Reviewed Conference and Workshop Papers</h2>
+<div class="outline-text-2" id="text-org961d25d">
 </div>
 <ul class="org-ul">
-<li><a id="org7e6176e"></a>2023<br>
+<li><a id="org67c9560"></a>2023<br>
 <ul class="org-ul">
-<li><a id="org4484e98"></a><a href="pubs/stretching_ghc.pdf">Stretching the Glasgow Haskell Compiler: Nourishing GHC with Domain-Driven Design</a><br>
-<div class="outline-text-4" id="text-org4484e98">
+<li><a id="org6ac5c29"></a><a href="pubs/stretching_ghc.pdf">Stretching the Glasgow Haskell Compiler: Nourishing GHC with Domain-Driven Design</a><br>
+<div class="outline-text-4" id="text-org6ac5c29">
 <p>
 Authors: Jeffrey M. Young, Sylvain Henry, John Ericson
 Conference: <i>1st ACM SIGPLAN International Workshop on Functional Software Architecture. (FUNARCH), 2023</i>
@@ -76,10 +85,10 @@ Conference: <i>1st ACM SIGPLAN International Workshop on Functional Software Arc
 </li>
 </ul>
 </li>
-<li><a id="org91c8de2"></a>2020<br>
+<li><a id="orgebc3f6f"></a>2020<br>
 <ul class="org-ul">
-<li><a id="orgbd21da3"></a><a href="pubs/vsat.pdf">Variational Satisfiability Solving</a><br>
-<div class="outline-text-4" id="text-orgbd21da3">
+<li><a id="org04ba3f9"></a><a href="pubs/vsat.pdf">Variational Satisfiability Solving</a><br>
+<div class="outline-text-4" id="text-org04ba3f9">
 <p>
 Authors: Jeffrey M. Young, Eric Walkingshaw, Thomas Thüm
 Conference: <i>ACM Int. Systems and Software Product Line Conf. (SPLC), 2020</i>
@@ -89,10 +98,10 @@ Data: <a href="https://github.com/lambda-land/VSat-Papers/tree/master/SPLC2020">
 </li>
 </ul>
 </li>
-<li><a id="orgf0f3e89"></a>2018<br>
+<li><a id="org6631f53"></a>2018<br>
 <ul class="org-ul">
-<li><a id="orgfb1c113"></a><a href="pubs/sigcse18-algorithm-explanations.pdf">A Domain Analysis of Data Structure and Algorithm Explanations in the Wild</a><br>
-<div class="outline-text-4" id="text-orgfb1c113">
+<li><a id="orge6aaabc"></a><a href="pubs/sigcse18-algorithm-explanations.pdf">A Domain Analysis of Data Structure and Algorithm Explanations in the Wild</a><br>
+<div class="outline-text-4" id="text-orge6aaabc">
 <p>
 Authors: Jeffrey M. Young and Eric Walkingshaw
 Conference: <i>ACM SIGCSE Technical Symp. on Computer Science Education (SIGCSE), 2018, 870–875</i>
@@ -104,15 +113,15 @@ Data: <a href="https://github.com/lambda-land/XOP-Algorithms-Data">on github</a>
 </li>
 </ul>
 </div>
-<div id="outline-container-orgb0531f8" class="outline-2">
-<h2 id="orgb0531f8">Journal Articles</h2>
-<div class="outline-text-2" id="text-orgb0531f8">
+<div id="outline-container-orgfd9c454" class="outline-2">
+<h2 id="orgfd9c454">Journal Articles</h2>
+<div class="outline-text-2" id="text-orgfd9c454">
 </div>
 <ul class="org-ul">
-<li><a id="org0d3faf9"></a>2022<br>
+<li><a id="org4f0d78d"></a>2022<br>
 <ul class="org-ul">
-<li><a id="orgd74e86f"></a>Variational Satisfiability Solving: Solving Lots of Related SAT Problems<br>
-<div class="outline-text-4" id="text-orgd74e86f">
+<li><a id="org09f8f45"></a>Variational Satisfiability Solving: Solving Lots of Related SAT Problems<br>
+<div class="outline-text-4" id="text-org09f8f45">
 <p>
 Authors: Jeffrey M. Young, Paul Maximilian Bittner, Eric Walkingshaw,
 Thomas Thüm
@@ -125,15 +134,15 @@ Publisher: Springer
 </li>
 </ul>
 </div>
-<div id="outline-container-org97caeb4" class="outline-2">
-<h2 id="org97caeb4">Theses and Other Papers</h2>
-<div class="outline-text-2" id="text-org97caeb4">
+<div id="outline-container-org6b5d0e3" class="outline-2">
+<h2 id="org6b5d0e3">Theses and Other Papers</h2>
+<div class="outline-text-2" id="text-org6b5d0e3">
 </div>
 <ul class="org-ul">
-<li><a id="orgcd5cc7d"></a>2022<br>
+<li><a id="orgfcc1432"></a>2022<br>
 <ul class="org-ul">
-<li><a id="org481ac71"></a>White Paper: <a href="https://hsyl20.fr/home/files/papers/2022-ghc-modularity.pdf">Modularizing GHC</a><br>
-<div class="outline-text-4" id="text-org481ac71">
+<li><a id="orgf1a4ea3"></a>White Paper: <a href="https://hsyl20.fr/home/files/papers/2022-ghc-modularity.pdf">Modularizing GHC</a><br>
+<div class="outline-text-4" id="text-orgf1a4ea3">
 <p>
 Authors: Sylvain Henry, John Ericson, Jeffery M. Young
 </p>
@@ -141,10 +150,10 @@ Authors: Sylvain Henry, John Ericson, Jeffery M. Young
 </li>
 </ul>
 </li>
-<li><a id="org0e4812e"></a>2021<br>
+<li><a id="org12dac1e"></a>2021<br>
 <ul class="org-ul">
-<li><a id="orgd2fdeb2"></a><a href="https://ir.library.oregonstate.edu/concern/graduate_thesis_or_dissertations/dv140182g">PhD Thesis: Variational Satisfiability Solving</a><br>
-<div class="outline-text-4" id="text-orgd2fdeb2">
+<li><a id="org2a29ef9"></a><a href="https://ir.library.oregonstate.edu/concern/graduate_thesis_or_dissertations/dv140182g">PhD Thesis: Variational Satisfiability Solving</a><br>
+<div class="outline-text-4" id="text-org2a29ef9">
 <p>
 Authors: Jeffrey M. Young
 </p>
@@ -154,15 +163,15 @@ Authors: Jeffrey M. Young
 </li>
 </ul>
 </div>
-<div id="outline-container-org8e4de40" class="outline-2">
-<h2 id="org8e4de40">Books</h2>
-<div class="outline-text-2" id="text-org8e4de40">
+<div id="outline-container-orgbfef939" class="outline-2">
+<h2 id="orgbfef939">Books</h2>
+<div class="outline-text-2" id="text-orgbfef939">
 </div>
 <ul class="org-ul">
-<li><a id="orgd4fecbf"></a>2022<br>
+<li><a id="org9dc548a"></a>2022<br>
 <ul class="org-ul">
-<li><a id="org754b0f4"></a><a href="https://github.com/input-output-hk/hs-opt-handbook.github.io">Haskell Optimization Handbook</a><br>
-<div class="outline-text-4" id="text-org754b0f4">
+<li><a id="orge6c068f"></a><a href="https://github.com/input-output-hk/hs-opt-handbook.github.io">Haskell Optimization Handbook</a><br>
+<div class="outline-text-4" id="text-orge6c068f">
 <p>
 Still in progress. Still much to write.
 </p>
@@ -172,22 +181,22 @@ Still in progress. Still much to write.
 </li>
 </ul>
 </div>
-<div id="outline-container-org57cff0b" class="outline-2">
-<h2 id="org57cff0b">Talks</h2>
-<div class="outline-text-2" id="text-org57cff0b">
+<div id="outline-container-org452efb9" class="outline-2">
+<h2 id="org452efb9">Talks</h2>
+<div class="outline-text-2" id="text-org452efb9">
 </div>
 <ul class="org-ul">
-<li><a id="orgc1dce11"></a>2025<br>
+<li><a id="org0a9d148"></a>2025<br>
 <ul class="org-ul">
-<li><a id="org5d7585f"></a><a href="https://www.youtube.com/live/FB0CS0X1QRc?si=1u_DEOrXryQOoh4R&amp;t=26177">What is Functional Architecture</a><br>
-<div class="outline-text-4" id="text-org5d7585f">
+<li><a id="org4e3a17f"></a><a href="https://www.youtube.com/live/FB0CS0X1QRc?si=1u_DEOrXryQOoh4R&amp;t=26177">What is Functional Architecture</a><br>
+<div class="outline-text-4" id="text-org4e3a17f">
 <p>
 Conference: <i>FUNARCH 2025</i>
 </p>
 </div>
 </li>
-<li><a id="org9639a1c"></a><a href="https://www.youtube.com/live/FB0CS0X1QRc?si=-Aoa5WxZILYGaKB0&amp;t=27678">Future of FUNARCH</a><br>
-<div class="outline-text-4" id="text-org9639a1c">
+<li><a id="orgf7da015"></a><a href="https://www.youtube.com/live/FB0CS0X1QRc?si=-Aoa5WxZILYGaKB0&amp;t=27678">Future of FUNARCH</a><br>
+<div class="outline-text-4" id="text-orgf7da015">
 <p>
 Conference: <i>FUNARCH 2025</i>
 </p>
@@ -195,10 +204,10 @@ Conference: <i>FUNARCH 2025</i>
 </li>
 </ul>
 </li>
-<li><a id="orgd75ff32"></a>2022<br>
+<li><a id="orge056555"></a>2022<br>
 <ul class="org-ul">
-<li><a id="orgeb3e492"></a><a href="https://github.com/input-output-hk/hs-opt-handbook.github.io">The Haskell Optimization Handbook</a><br>
-<div class="outline-text-4" id="text-orgeb3e492">
+<li><a id="orga98354d"></a><a href="https://github.com/input-output-hk/hs-opt-handbook.github.io">The Haskell Optimization Handbook</a><br>
+<div class="outline-text-4" id="text-orga98354d">
 <p>
 Conference: <i>Haskell Implementors Workshop, (HiW), 2022</i>
 </p>
@@ -206,10 +215,10 @@ Conference: <i>Haskell Implementors Workshop, (HiW), 2022</i>
 </li>
 </ul>
 </li>
-<li><a id="org8f5f09c"></a>2021<br>
+<li><a id="orgf9c753d"></a>2021<br>
 <ul class="org-ul">
-<li><a id="orgf8124ba"></a><a href="https://youtu.be/dFDTzYsXu6c">Adventures in GHC Compile Times</a><br>
-<div class="outline-text-4" id="text-orgf8124ba">
+<li><a id="orga90c133"></a><a href="https://youtu.be/dFDTzYsXu6c">Adventures in GHC Compile Times</a><br>
+<div class="outline-text-4" id="text-orga90c133">
 <p>
 Conference: <i>Haskell Implementors Workshop, (HiW), 2021</i>
 </p>
@@ -219,43 +228,43 @@ Conference: <i>Haskell Implementors Workshop, (HiW), 2021</i>
 </li>
 </ul>
 </div>
-<div id="outline-container-orgc0685be" class="outline-2">
-<h2 id="orgc0685be">Service</h2>
-<div class="outline-text-2" id="text-orgc0685be">
+<div id="outline-container-orgf6d72cb" class="outline-2">
+<h2 id="orgf6d72cb">Service</h2>
+<div class="outline-text-2" id="text-orgf6d72cb">
 </div>
 <ul class="org-ul">
-<li><a id="orgc9a68e7"></a>2026<br>
+<li><a id="orgcf78069"></a>2026<br>
 <ul class="org-ul">
-<li><a id="orgd205d69"></a><a href="https://icfp26.sigplan.org/home/funarch-2026">Program Chair</a><br>
-<div class="outline-text-4" id="text-orgd205d69">
+<li><a id="org8c2d471"></a><a href="https://icfp26.sigplan.org/home/funarch-2026">Program Chair</a><br>
+<div class="outline-text-4" id="text-org8c2d471">
 <p>
 Conference: <i>4rd ACM SIGPLAN International Workshop on Functional Software Architecture. (FUNARCH), 2026</i>
 </p>
 </div>
 </li>
-<li><a id="org82fe6e4"></a><a href="https://github.com/haskell/core-libraries-committee">Haskell Core Library Committee Member</a><br></li>
+<li><a id="orgf6c2434"></a><a href="https://github.com/haskell/core-libraries-committee">Haskell Core Library Committee Member</a><br></li>
 
-<li><a id="orga3b1ceb"></a><a href="https://www.haskell.org/haskell-org-committee/">Haskell.org Committee Member</a><br></li>
+<li><a id="org82f37d4"></a><a href="https://www.haskell.org/haskell-org-committee/">Haskell.org Committee Member</a><br></li>
 
-<li><a id="orgaf56123"></a><a href="https://github.com/ghc-proposals/ghc-proposals/#who-is-the-committee">Glasgow Haskell Compiler Steering Committee Member</a><br></li>
+<li><a id="org9167729"></a><a href="https://github.com/ghc-proposals/ghc-proposals/#who-is-the-committee">Glasgow Haskell Compiler Steering Committee Member</a><br></li>
 </ul>
 </li>
-<li><a id="orge4ded32"></a>2025<br>
+<li><a id="org710881c"></a>2025<br>
 <ul class="org-ul">
-<li><a id="org32cf28b"></a><a href="https://dl.acm.org/doi/proceedings/10.1145/3759163">Program Chair</a><br>
-<div class="outline-text-4" id="text-org32cf28b">
+<li><a id="org69348ed"></a><a href="https://dl.acm.org/doi/proceedings/10.1145/3759163">Program Chair</a><br>
+<div class="outline-text-4" id="text-org69348ed">
 <p>
 Conference: <i>3rd ACM SIGPLAN International Workshop on Functional Software Architecture. (FUNARCH), 2025</i>
 </p>
 </div>
 </li>
-<li><a id="org3a4bcb5"></a><a href="https://github.com/haskell/core-libraries-committee">Haskell Core Library Committee Member</a><br></li>
+<li><a id="org601f3c1"></a><a href="https://github.com/haskell/core-libraries-committee">Haskell Core Library Committee Member</a><br></li>
 </ul>
 </li>
-<li><a id="org7bbcea7"></a>2024<br>
+<li><a id="orgf640c5a"></a>2024<br>
 <ul class="org-ul">
-<li><a id="org8599afd"></a><a href="https://dl.acm.org/doi/proceedings/10.1145/3677998">Program Committee</a><br>
-<div class="outline-text-4" id="text-org8599afd">
+<li><a id="org84eb8e7"></a><a href="https://dl.acm.org/doi/proceedings/10.1145/3677998">Program Committee</a><br>
+<div class="outline-text-4" id="text-org84eb8e7">
 <p>
 Conference: <i>2nd ACM SIGPLAN International Workshop on Functional Software Architecture. (FUNARCH), 2024</i>
 </p>

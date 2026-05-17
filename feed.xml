@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+     xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+     xmlns:georss="http://www.georss.org/georss"
+     xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+     xmlns:media="http://search.yahoo.com/mrss/"><channel>
+  <title>Speaking with Machines</title>
+  <atom:link href="https://pure-systems.org/feed.xml" rel="self" type="application/rss+xml" />
+  <link>https://pure-systems.org/</link>
+  <description><![CDATA[]]></description>
+  <language>en</language>
+  <pubDate>Sun, 17 May 2026 14:05:00 +0000</pubDate>
+  <lastBuildDate>Sun, 17 May 2026 14:05:00 +0000</lastBuildDate>
+  <generator>Emacs 30.2 Org-mode 9.8</generator>
+  <webMaster>jmy6342@gmail.com (doyougnu)</webMaster>
+  <image>
+    <url>https://orgmode.org/img/org-mode-unicorn-logo.png</url>
+    <title>Speaking with Machines</title>
+    <link>https://pure-systems.org/</link>
+  </image>
+
+  <ul class="org-ul">
+    <li><p>
+      * <a href="https://pure-systems.org//posts/2026-04-10-dear-ai-companies-your-limits-are-a-feature.html">Dear AI companies: Your rate limits are my favorite feature</a>
+    </p>
+    <p>
+      :RSS<sub>PERMALINK</sub>: /posts/2026-04-10-dear-ai-companies-your-limits-are-a-feature.html
+      :PUBDATE:  
+    </p></li>
+  </ul>
+</channel>
+</rss>
