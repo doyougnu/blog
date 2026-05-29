@@ -1,7 +1,7 @@
 #+title: The Type Theorists need to take a look at Zig
 #+date: 2026-03-27
 #+author: Jeffrey Young
-#+filetags:
+#+filetags: :zig: :type-theory:
 
 I've recently been porting the [[https://hackage-content.haskell.org/package/sbv-13.6][sbv]] library (of which I was a major contributor
 to) to Zig. Why? Several reasons: I think the cost of formal methods has

@@ -1,6 +1,6 @@
 #+title: Functional Programmers need to take a look at Zig.
 #+date: 2026-04-29
-#+filetags:
+#+filetags: :fp: :zig:
 
 I've been tinkering around with Zig to explore what's possible with comptime.
 Whenever I evaluate a new language I use three axes:
