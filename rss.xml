@@ -9,29 +9,20 @@
      xmlns:georss="http://www.georss.org/georss"
      xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
      xmlns:media="http://search.yahoo.com/mrss/"><channel>
-  <title>Speaking with Machines</title>
-  <atom:link href="https://pure-systems.org/feed.xml" rel="self" type="application/rss+xml" />
-  <link>https://pure-systems.org/</link>
+  <title></title>
+  <atom:link href="https://doyougnu.github.io/feed.xml" rel="self" type="application/rss+xml" />
+  <link>https://doyougnu.github.io/</link>
   <description><![CDATA[]]></description>
   <language>en</language>
-  <pubDate>Sun, 17 May 2026 14:05:00 +0000</pubDate>
-  <lastBuildDate>Sun, 17 May 2026 14:05:00 +0000</lastBuildDate>
+  <pubDate>Sat, 30 May 2026 22:38:43 +0000</pubDate>
+  <lastBuildDate>Sat, 30 May 2026 22:38:43 +0000</lastBuildDate>
   <generator>Emacs 30.2 Org-mode 9.8</generator>
   <webMaster>jmy6342@gmail.com (doyougnu)</webMaster>
   <image>
     <url>https://orgmode.org/img/org-mode-unicorn-logo.png</url>
-    <title>Speaking with Machines</title>
-    <link>https://pure-systems.org/</link>
+    <title></title>
+    <link>https://doyougnu.github.io/</link>
   </image>
 
-  <ul class="org-ul">
-    <li><p>
-      * <a href="https://pure-systems.org//posts/2026-04-10-dear-ai-companies-your-limits-are-a-feature.html">Dear AI companies: Your rate limits are my favorite feature</a>
-    </p>
-    <p>
-      :RSS<sub>PERMALINK</sub>: /posts/2026-04-10-dear-ai-companies-your-limits-are-a-feature.html
-      :PUBDATE:  
-    </p></li>
-  </ul>
 </channel>
 </rss>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 17 May 2026 -->
+<!-- 30 May 2026 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Why Haskell is my language of choice</title>
@@ -17,7 +17,6 @@
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
                 font-size: 16px;
                 line-height: 1.8;
-                text-shadow: 0 1px 0 #ffffff;
                 max-width: 80ch;
             }
             pre.src {
@@ -35,38 +34,56 @@
                 padding: 2px 4px;
                 border-radius: 3px;
             }
-            /* Haskell Specific Syntax Colors */
             .org-haskell-keyword     { color: #a71d5d; font-weight: bold; }
             .org-haskell-type        { color: #0086b3; }
             .org-haskell-constructor { color: #63a35c; font-weight: bold; }
             .org-haskell-operator    { color: #333333; }
             .org-haskell-definition  { color: #795da3; }
             .org-doc                 { color: #969896; font-style: italic; }
-            /* General Syntax Colors */
-            .org-keyword       { color: #a71d5d; font-weight: bold; }
-            .org-string        { color: #183691; }
-            .org-comment       { color: #969896; font-style: italic; }
-            .org-type          { color: #0086b3; }
+
+            .org-keyword { color: #a71d5d; font-weight: bold; }
+            .org-string  { color: #183691; }
+            .org-comment { color: #969896; font-style: italic; }
+            .org-type    { color: #0086b3; }
             .org-function-name { color: #795da3; }
             .org-variable-name { color: #ed6a43; }
-            /* Tag pill styles - used on index and post pages */
-            .post-tag {
+
+           /* RSS Subscription Link Styling */
+           .rss-link {
+               display: inline-flex;
+               align-items: center;
+               font-size: 0.9em;
+               color: #555;
+               border-bottom: 1px dashed #f26522 !important; /* Subtle orange dash */
+               padding-bottom: 2px;
+               text-decoration: none;
+           }
+           .rss-link:hover {
+               color: #f26522;
+               border-bottom: 1px solid #f26522 !important;
+           }
+
+            /* Tag Layout Styles */
+            .post-tags { margin-bottom: 1em; }
+            .tag {
                 display: inline-block;
-                background: #e8e8e8;
+                background: #f0f0f0;
                 color: #555;
-                padding: 2px 8px;
+                font-size: 0.75em;
+                font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+                padding: 1px 6px;
                 border-radius: 3px;
-                font-size: 0.8em;
-                margin-right: 4px;
-                text-decoration: none;
-                border-bottom: none;
+                margin-left: 4px;
+                vertical-align: middle;
             }
-            .post-tag:hover { background: #d0d0d0; border-bottom: none; }
             a { border-bottom: 1px solid #444444; color: #444444; text-decoration: none; }
             a:hover { border-bottom: 0; }
         </style>
 </head>
 <body>
+<div id="preamble" class="status">
+<div class='post-tags'>Tags: <a href='../tags/index.html#draft' class='tag'>draft</a></div>
+</div>
 <div id="content" class="content">
 <h1 class="title">Why Haskell is my language of choice</h1>
 <p>
@@ -97,28 +114,28 @@ build that allows us to discover, explore and analyze the world of computation.
 Let&rsquo;s go through a worked example. Imagine you are trying to build something,
 anything, say a calculator app.
 </p>
-<div id="outline-container-org9c78acd" class="outline-2">
-<h2 id="org9c78acd">Type theory forall podcast</h2>
+<div id="outline-container-orgd4efe23" class="outline-2">
+<h2 id="orgd4efe23">Type theory forall podcast</h2>
 </div>
 
-<div id="outline-container-org59aa683" class="outline-2">
-<h2 id="org59aa683">microscopes</h2>
+<div id="outline-container-orgfc2f64f" class="outline-2">
+<h2 id="orgfc2f64f">microscopes</h2>
 </div>
 
-<div id="outline-container-org4e349f0" class="outline-2">
-<h2 id="org4e349f0">types as exploration</h2>
+<div id="outline-container-org2060718" class="outline-2">
+<h2 id="org2060718">types as exploration</h2>
 </div>
 
-<div id="outline-container-orgb62630d" class="outline-2">
-<h2 id="orgb62630d">A push towards the algebraic</h2>
+<div id="outline-container-org2e07d16" class="outline-2">
+<h2 id="org2e07d16">A push towards the algebraic</h2>
 </div>
 
-<div id="outline-container-org52daee6" class="outline-2">
-<h2 id="org52daee6"><span class="todo TODO">TODO</span> link the podcast</h2>
+<div id="outline-container-org2b75d17" class="outline-2">
+<h2 id="org2b75d17"><span class="todo TODO">TODO</span> link the podcast</h2>
 </div>
 
-<div id="outline-container-org9fd945f" class="outline-2">
-<h2 id="org9fd945f"><span class="todo TODO">TODO</span> link conal&rsquo;s page</h2>
+<div id="outline-container-orge14ef4d" class="outline-2">
+<h2 id="orge14ef4d"><span class="todo TODO">TODO</span> link conal&rsquo;s page</h2>
 </div>
 </div>
 <div id="postamble" class="status">
@@ -132,6 +149,7 @@ anything, say a calculator app.
                   <a href='/publications.html'>Publications</a>
                   <a href='https://github.com/doyougnu'>Github</a>
                   <a href='/me.html'>About</a>
+                  <a href='rss.xml'>RSS</a>
                </div>
 </div>
 </body>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- 17 May 2026 -->
+<!-- 30 May 2026 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Speaking with machines</title>
@@ -17,7 +17,6 @@
                 font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
                 font-size: 16px;
                 line-height: 1.8;
-                text-shadow: 0 1px 0 #ffffff;
                 max-width: 80ch;
             }
             pre.src {
@@ -35,33 +34,48 @@
                 padding: 2px 4px;
                 border-radius: 3px;
             }
-            /* Haskell Specific Syntax Colors */
             .org-haskell-keyword     { color: #a71d5d; font-weight: bold; }
             .org-haskell-type        { color: #0086b3; }
             .org-haskell-constructor { color: #63a35c; font-weight: bold; }
             .org-haskell-operator    { color: #333333; }
             .org-haskell-definition  { color: #795da3; }
             .org-doc                 { color: #969896; font-style: italic; }
-            /* General Syntax Colors */
-            .org-keyword       { color: #a71d5d; font-weight: bold; }
-            .org-string        { color: #183691; }
-            .org-comment       { color: #969896; font-style: italic; }
-            .org-type          { color: #0086b3; }
+
+            .org-keyword { color: #a71d5d; font-weight: bold; }
+            .org-string  { color: #183691; }
+            .org-comment { color: #969896; font-style: italic; }
+            .org-type    { color: #0086b3; }
             .org-function-name { color: #795da3; }
             .org-variable-name { color: #ed6a43; }
-            /* Tag pill styles - used on index and post pages */
-            .post-tag {
+
+           /* RSS Subscription Link Styling */
+           .rss-link {
+               display: inline-flex;
+               align-items: center;
+               font-size: 0.9em;
+               color: #555;
+               border-bottom: 1px dashed #f26522 !important; /* Subtle orange dash */
+               padding-bottom: 2px;
+               text-decoration: none;
+           }
+           .rss-link:hover {
+               color: #f26522;
+               border-bottom: 1px solid #f26522 !important;
+           }
+
+            /* Tag Layout Styles */
+            .post-tags { margin-bottom: 1em; }
+            .tag {
                 display: inline-block;
-                background: #e8e8e8;
+                background: #f0f0f0;
                 color: #555;
-                padding: 2px 8px;
+                font-size: 0.75em;
+                font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+                padding: 1px 6px;
                 border-radius: 3px;
-                font-size: 0.8em;
-                margin-right: 4px;
-                text-decoration: none;
-                border-bottom: none;
+                margin-left: 4px;
+                vertical-align: middle;
             }
-            .post-tag:hover { background: #d0d0d0; border-bottom: none; }
             a { border-bottom: 1px solid #444444; color: #444444; text-decoration: none; }
             a:hover { border-bottom: 0; }
         </style>
@@ -69,20 +83,20 @@
 <body>
 <div id="content" class="content">
 <h1 class="title">Speaking with machines</h1>
-<div id="outline-container-orgf1624ac" class="outline-2">
-<h2 id="orgf1624ac">2026</h2>
-<div class="outline-text-2" id="text-orgf1624ac">
+<div id="outline-container-orga000283" class="outline-2">
+<h2 id="orga000283">2026</h2>
+<div class="outline-text-2" id="text-orga000283">
 </div>
-<div id="outline-container-orgf3c7147" class="outline-3">
-<h3 id="orgf3c7147"><a href="posts/2026-04-29-functional-programmers-need-to-take-a-look-at-zig.html">Functional Programmers need to take a look at Zig</a></h3>
-</div>
-
-<div id="outline-container-org6ad95fc" class="outline-3">
-<h3 id="org6ad95fc"><a href="posts/2026-03-27-the-type-theorists-need-to-take-a-look-at-zig.html">The Type Theorists need to take a look at Zig</a></h3>
+<div id="outline-container-orgeedc4fd" class="outline-3">
+<h3 id="orgeedc4fd"><a href="posts/2026-04-29-functional-programmers-need-to-take-a-look-at-zig.html">Functional Programmers need to take a look at Zig</a></h3>
 </div>
 
-<div id="outline-container-org436de5f" class="outline-3">
-<h3 id="org436de5f"><a href="posts/2026-04-10-dear-ai-companies-your-limits-are-a-feature.html">Dear AI companies: Your rate limits are my favorite feature</a></h3>
+<div id="outline-container-orgfac7a9b" class="outline-3">
+<h3 id="orgfac7a9b"><a href="posts/2026-03-27-the-type-theorists-need-to-take-a-look-at-zig.html">The Type Theorists need to take a look at Zig</a></h3>
+</div>
+
+<div id="outline-container-org135a21c" class="outline-3">
+<h3 id="org135a21c"><a href="posts/2026-04-10-dear-ai-companies-your-limits-are-a-feature.html">Dear AI companies: Your rate limits are my favorite feature</a></h3>
 </div>
 </div>
 </div>
@@ -97,6 +111,7 @@
                   <a href='/publications.html'>Publications</a>
                   <a href='https://github.com/doyougnu'>Github</a>
                   <a href='/me.html'>About</a>
+                  <a href='rss.xml'>RSS</a>
                </div>
 </div>
 </body>
