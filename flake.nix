@@ -20,8 +20,8 @@
         # Use 'emacs-unstable-nox' or 'emacs-29-nox' from the overlay.
         # These are highly likely to have binary substitutes.
         myEmacs = (pkgs.emacsPackagesFor pkgs.emacs).emacsWithPackages (epkgs: with epkgs; [
-          # org
-          # ox-rss
+          org
+          ox-rss
           htmlize
           zig-mode
           haskell-mode

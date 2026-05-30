@@ -1,0 +1,48 @@
+name: Compile and Deploy Blog
+on:
+  push:
+    branches: [ main ]
+
+# attempt 1
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v4
+
+      - name: Install Emacs
+        run: |
+          apk update
+          apk add emacs-nox git openssh-client
+
+      - name: Compile Blog via Emacs
+        run: |
+          emacs --batch -l publish.el -f doyougnu/publish
+
+      - name: Inject Custom Domain Meta
+        run: |
+          echo "pure-systems.org" > ./build/.domains
+
+      - name: Deploy Assets to Pages Repo
+        env:
+          SSH_KEY: ${{ secrets.DEPLOY_KEY }}
+          TARGET_REPO: "git@codeberg.org:doyougnu/pages.git"
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          echo "$SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -t ed25519 codeberg.org >> ~/.ssh/known_hosts
+
+          git config --global user.name "doyougnu-bot"
+          git config --global user.email "jmy6342@gmail.com"
+
+          cd ./build
+          git init
+          git checkout -b pages
+          git remote add origin "$TARGET_REPO"
+          git add .
+          git commit -m "Automated CI deploy: ${{ github.sha }}"
+          git push -f origin pages
